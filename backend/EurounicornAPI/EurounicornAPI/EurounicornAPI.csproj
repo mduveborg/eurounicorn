@@ -75,7 +75,6 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomBootstrapper.cs" />
     <Compile Include="DistModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
