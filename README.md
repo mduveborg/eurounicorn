@@ -6,15 +6,19 @@ This is the grandest competition of all times
 Getting started - Frontend
 ---------------
 
-Installera NodeJS, Ruby och Git. Klona repo
+Installera NodeJS, Ruby och Git. Se till att ha senaste nodejs, använd gärna nvm.
+
+Klona repo
 
     git clone https://github.com/danielwerthen/eurounicorn.git
     
     cd eurounicorn
     
-Installera verktyp
+Installera verktyg
 
     npm install -g grunt grunt-cli bower
+    
+    gem install compass
     
 Installera dependencies
 
@@ -34,6 +38,7 @@ Bygg frontend
     (cd frontend && grunt)
     
 Getting started - Backend
+-------------------------
 
 Installera [Visual Studio 2013 express](http://www.visualstudio.com/products/visual-studio-express-vs)
 
