@@ -16,7 +16,7 @@ Klona repo
     
 Installera verktyg
 
-    npm install -g grunt grunt-cli bower
+    npm install -g grunt-cli bower
     
     gem install compass
     
