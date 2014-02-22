@@ -1,8 +1,10 @@
-module.exports = function(config){
-	config.set({
-    basePath : '.',
+'use strict';
 
-    files : [
+module.exports = function (config) {
+	config.set({
+		basePath : '.',
+
+		files : [
 			'app/bower_components/angular/angular.js',
 			'app/bower_components/angular-cookies/angular-cookies.js',
 			'app/bower_components/angular-mocks/angular-mocks.js',
@@ -14,30 +16,36 @@ module.exports = function(config){
 			'app/bower_components/json3/lib/json3.js',
 			'app/scripts/**/*.js',
 			'test/spec/**/*.js'
-    ],
+		],
 
-    exclude : [
-    ],
+		exclude : [
+		],
 
-    autoWatch : true,
+		autoWatch : true,
 
-    frameworks: ['jasmine'],
+		port: 9876,
 
-    browsers : ['Chrome'],
+		proxies: { '/': 'http://localhost:9000' },
 
-	singleRun: false,
+		urlRoot: '/ karma/',
 
-    plugins : [
+		frameworks: ['jasmine'],
+
+		browsers : ['Chrome'],
+
+		singleRun: false,
+
+		plugins : [
 			'karma-junit-reporter',
 			'karma-chrome-launcher',
 			'karma-firefox-launcher',
 			'karma-jasmine'
 		],
 
-    junitReporter : {
-      outputFile: 'test_out/unit.xml',
-      suite: 'unit'
-    }
+		junitReporter : {
+			outputFile: 'test_out/unit.xml',
+			suite: 'unit'
+		}
 
 	});
-}
+};
