@@ -39,10 +39,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Ewk.Extensions.1.1.4759.21149\lib\net45\Ewk.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="Ewk.SoundCloud.ApiLibrary, Version=1.1.4809.41996, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Ewk.SoundCloud.ApiLibrary.1.1.4809.41996\lib\net45\Ewk.SoundCloud.ApiLibrary.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
     <Reference Include="Nancy">
@@ -83,6 +79,10 @@
     <Compile Include="SoundCloudTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ApiLibrary\ApiLibrary.csproj">
+      <Project>{a6426faa-97c0-480e-ac65-920a777b3e46}</Project>
+      <Name>ApiLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EurounicornAPI\EurounicornAPI.csproj">
       <Project>{6400B848-26C8-4988-8F9B-90A39A47CE8B}</Project>
       <Name>EurounicornAPI</Name>

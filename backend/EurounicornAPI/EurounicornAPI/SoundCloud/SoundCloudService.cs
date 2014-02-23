@@ -10,6 +10,8 @@ using System.IO;
 using System.Text;
 using Krystalware.UploadHelper;
 using System.Collections.Specialized;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace EurounicornAPI.SoundCloud
 {
@@ -76,6 +78,13 @@ namespace EurounicornAPI.SoundCloud
             if (title != null)
                 return cloud.Me.Tracks.Get().Where(t => t.title == title).ToList();
             return cloud.Me.Tracks.Get().ToList();
+        }
+
+        public async Task<IEnumerable<Track>> GetTracksAsync(string token)
+        {
+            var cloud = new Ewk.SoundCloud.ApiLibrary.SoundCloud(ClientId, token);
+            var test = cloud.Me.Get();
+            return await cloud.Me.Tracks.GetAsync();
         }
 
         private string UploadTrack(Stream data, string token, string title, string filename)

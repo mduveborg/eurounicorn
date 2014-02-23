@@ -41,10 +41,6 @@
     <Reference Include="Ewk.Extensions">
       <HintPath>..\packages\Ewk.Extensions.1.1.4759.21149\lib\net45\Ewk.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="Ewk.SoundCloud.ApiLibrary, Version=1.1.4809.41996, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Ewk.SoundCloud.ApiLibrary.1.1.4809.41996\lib\net45\Ewk.SoundCloud.ApiLibrary.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Nancy">
       <HintPath>..\packages\Nancy.0.22.2\lib\net40\Nancy.dll</HintPath>
@@ -93,6 +89,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuthModule.cs" />
     <Compile Include="DistModule.cs" />
     <Compile Include="Mailing\MailgunService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -100,6 +97,10 @@
     <Compile Include="SubmissionModule.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ApiLibrary\ApiLibrary.csproj">
+      <Project>{a6426faa-97c0-480e-ac65-920a777b3e46}</Project>
+      <Name>ApiLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\UploadHelper\UploadHelper.csproj">
       <Project>{02fbd52c-b997-4d18-9e2c-81b5ae8efb30}</Project>
       <Name>UploadHelper</Name>
