@@ -1,4 +1,4 @@
-// Generated on 2014-02-21 using generator-angular 0.7.1
+// Generated on 2014-02-23 using generator-angular 0.7.1
 'use strict';
 
 // # Globbing
@@ -22,7 +22,7 @@ module.exports = function (grunt) {
     yeoman: {
       // configurable paths
       app: require('./bower.json').appPath || 'app',
-      dist: './dist'
+      dist: 'dist'
     },
 
     // Watches files for changes and runs tasks based on the changed files
