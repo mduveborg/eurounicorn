@@ -12,4 +12,6 @@ angular.module('frontendAppDev', ['frontendApp', 'ngMockE2E'])
 
 		//override this route with a response
 		$httpBackend.whenPOST('/api/login').respond({ token: 'dev' });
+
+		$httpBackend.whenGET('/api/submissions').passThrough();
 	});
