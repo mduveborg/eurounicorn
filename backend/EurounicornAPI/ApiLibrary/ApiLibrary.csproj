@@ -161,7 +161,6 @@
     <Compile Include="SoundCloudException.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ApiLibrary.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
