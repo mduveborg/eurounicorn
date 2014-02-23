@@ -25,8 +25,6 @@ module.exports = function(config){
 
     browsers : ['Chrome'],
 
-	singleRun: false,
-
     plugins : [
 			'karma-junit-reporter',
 			'karma-chrome-launcher',
