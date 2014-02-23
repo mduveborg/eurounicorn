@@ -9,7 +9,7 @@ namespace EurounicornAPI.Tests
         [TestMethod]
         public void TestMethod1()
         {
-            Mailing.MailgunService.SendSimpleMessage();
+            //Mailing.MailgunService.SendSimpleMessage();
         }
     }
 }
