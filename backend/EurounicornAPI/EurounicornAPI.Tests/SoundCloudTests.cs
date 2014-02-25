@@ -11,6 +11,9 @@ namespace EurounicornAPI.Tests
         [TestMethod]
         public void TestGet()
         {
+            /*
+             * Something added
+             */
             var service = new SoundCloud.SoundCloudService();
             var token = service.GetAccessToken();
             Assert.IsTrue(!string.IsNullOrEmpty(token));
