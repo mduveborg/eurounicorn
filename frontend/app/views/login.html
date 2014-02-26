@@ -1,5 +1,15 @@
-<p>This is the login view.</p>
-<form ng-submit="submit()">
-	<input type="submit" ngClick="Submit"/> 
-	<p>{{ message }}</p>
+
+<form style="text-align: center;margin-top: 40px;" ng-submit="submit()" class="form-inline" role="form">
+
+  <p>Enter your Netlight username. An email will be sent to your Netlight email, click the link in the email to sign in!</p>
+
+  <div ng-class="{'has-error': !!message }" class="form-group">
+    <input ng-model="input" type="text" class="form-control" placeholder="your Netlight username">
+  </div>
+
+  <button type="submit" class="btn btn-default">Submit</button>
+
+  <p class="text-danger">{{ message }}</p>
+
 </form>
+
