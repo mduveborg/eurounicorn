@@ -30,6 +30,9 @@ angular.module('frontendApp', [
 			templateUrl: 'views/login.html',
 			controller: 'LoginCtrl'
 		})
+		.when('/list', {
+			templateUrl: 'views/list.html'
+		})
 		.otherwise({
 			redirectTo: '/'
 		});
