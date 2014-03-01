@@ -36,7 +36,7 @@ angular.module('frontendApp.Services', [])
 	}])
 	.factory('authService', ['$http', '$q', 'auth', function ($http, $q, auth) {
 		return {
-			login: function (email) {
+			login: function (input) {
 				var deferred = $q.defer(),
 					promise = deferred.promise;
 
@@ -52,7 +52,7 @@ angular.module('frontendApp.Services', [])
 
 				$http({method: 'POST',
 					url: '/api/login',
-					data: { email: email }
+					data: { input: input }
 				})
 					.success(function (data) {
 						auth.setToken(data.token);
