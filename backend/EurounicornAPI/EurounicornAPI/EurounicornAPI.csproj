@@ -40,6 +40,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.3.1.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4">
+      <HintPath>..\packages\AutoMapper.3.1.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
     <Reference Include="Ewk.Extensions">
       <HintPath>..\packages\Ewk.Extensions.1.1.4759.21149\lib\net45\Ewk.Extensions.dll</HintPath>
     </Reference>
@@ -79,6 +85,10 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\packages\AutoMapper.3.1.1\lib\net40\AutoMapper.Net4.dll">
+      <Link>AutoMapper.Net4.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -92,6 +102,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthModule.cs" />
+    <Compile Include="AutoMapperResolvers\SoundCloudMetaResolver.cs" />
+    <Compile Include="AutoMapperResolvers\ISoundCloudMetaResolver.cs" />
+    <Compile Include="Beans\SoundCloudMetaDto.cs" />
+    <Compile Include="Beans\TrackDto.cs" />
     <Compile Include="DistModule.cs" />
     <Compile Include="Mailing\MailgunService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
