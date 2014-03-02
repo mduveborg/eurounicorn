@@ -39,7 +39,7 @@ namespace EurounicornAPI
 
                     // Get the track id of the uploaded track
                     int trackId = -1;
-                    Match match = Regex.Match(response, "^.*\"id\":([0-9]*);.*$");
+                    Match match = Regex.Match(response, "^.*\"id\":([0-9]*),.*$");
                     if (match.Success) trackId = Convert.ToInt32(match.Groups[1].Value);
 
                     // Store custom meta information to database.
@@ -49,8 +49,11 @@ namespace EurounicornAPI
                         dto.TrackId = trackId;
 
                         // Add the meta information
-                        dto.Author = "TestAuthor2";
-
+                        dto.SongTitle = this.Request.Form.SongTitle;
+                        dto.StageName = this.Request.Form.StageName;
+                        dto.Musicians = this.Request.Form.Musicians;
+                        dto.Composers = this.Request.Form.Composers;
+                        
                         var db = new CouchDBService();
                         db.Set<CustomTrackMetaDto>(dto);
                     }
