@@ -51,7 +51,10 @@ namespace EurounicornAPI
 
         private IUserIdentity Authenticate(string authorization)
         {
-            var user = tokenService.FindUser(authorization);
+            var splits = authorization.Split(new char[1] { '!' }, StringSplitOptions.RemoveEmptyEntries);
+            var username = splits.First();
+            var token = splits.Last();
+            var user = tokenService.FindUser(token, username);
             if (user == null)
             {
                 Random r = new Random();

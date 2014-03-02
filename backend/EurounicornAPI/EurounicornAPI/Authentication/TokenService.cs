@@ -17,11 +17,14 @@ namespace EurounicornAPI.Authentication
             this.db = db;
             expiration = TimeSpan.FromDays(30);
         }
-        public IUserIdentity FindUser(string token)
+        public IUserIdentity FindUser(string token, string username)
         {
-            var matches = db.FindByToken<TokenDto>(PasswordHash.CreateHash(token));
+            var matches = db.FindByUsername<TokenDto>(username);
             foreach (var match in matches)
-                return new UserIdentity() { UserName = match.Username };
+            {
+                if (PasswordHash.ValidatePassword(token, match.Token))
+                    return new UserIdentity() { UserName = match.Username };
+            }
             return null;
         }
 

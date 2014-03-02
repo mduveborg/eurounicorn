@@ -12,5 +12,6 @@ namespace EurounicornAPI.Authentication
         public string Username { get; set; }
         public string Token { get; set; }
         public DateTime Created { get; set; }
+        public string docType { get { return "token"; } }
     }
 }
