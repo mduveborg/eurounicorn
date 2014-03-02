@@ -37,7 +37,10 @@ angular.module('frontendApp', [
 		})
 		.when('/list', {
 			templateUrl: 'views/list.html',
-			controller: 'ListCtrl'
+			controller: 'ListCtrl',
+			resolve: {
+				factory: checkAuthResolver
+			}
 		})
             .when('/submission', {
                 templateUrl: 'views/submission.html',

@@ -1,17 +1,36 @@
 ﻿using EurounicornAPI.Authentication;
 using EurounicornAPI.Mailing;
 using Nancy;
+using Nancy.ModelBinding;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Web;
 
 namespace EurounicornAPI
 {
+    public class LoginRequestDto
+    {
+        public string Username { get; set; }
+    }
+
     public class LoginModule : NancyModule
     {
+        static public string AssemblyDirectory
+        {
+            get
+            {
+                string codeBase = Assembly.GetExecutingAssembly().CodeBase;
+                UriBuilder uri = new UriBuilder(codeBase);
+                string path = Uri.UnescapeDataString(uri.Path);
+                return Path.GetDirectoryName(path);
+            }
+        }
+
         public LoginModule()
             : base("/api/login")
         {
@@ -20,11 +39,13 @@ namespace EurounicornAPI
 
             Post["/"] = ctx =>
             {
-                var username = this.Request.Form.Username;
+                string username;
+                var dto = this.Bind<LoginRequestDto>();
+                username = dto.Username;
                 var validationResponse = ValidateUsername(username);
                 if (validationResponse != null) return validationResponse;
                 var token = tokenService.Login(username);
-                MailgunService.SendMail(username, "The unicorn says hi!", string.Format(File.ReadAllText("./Mailing/LoginMailResponse.txt"), "unieurocornlightvision.azurewebsites.net", token));
+                MailgunService.SendMail(username, "The unicorn says hi!", string.Format(File.ReadAllText(Path.Combine(AssemblyDirectory, "Mailing\\LoginMailResponse.txt")), "localhost:3827", token));
                 return HttpStatusCode.OK;
             };
         }

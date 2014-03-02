@@ -52,7 +52,7 @@ angular.module('frontendApp.Services', [])
 
 				$http({method: 'POST',
 					url: '/api/login',
-					data: { input: input }
+					data: { username: input }
 				})
 					.success(function (data) {
 						deferred.resolve(true);
