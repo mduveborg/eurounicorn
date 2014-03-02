@@ -49,6 +49,12 @@
     <Reference Include="Ewk.Extensions">
       <HintPath>..\packages\Ewk.Extensions.1.1.4759.21149\lib\net45\Ewk.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="LoveSeat">
+      <HintPath>..\packages\LoveSeat.1.0.1\lib\net40\LoveSeat.dll</HintPath>
+    </Reference>
+    <Reference Include="LoveSeat.Interfaces">
+      <HintPath>..\packages\LoveSeat.1.0.1\lib\net40\LoveSeat.Interfaces.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Nancy">
       <HintPath>..\packages\Nancy.0.22.2\lib\net40\Nancy.dll</HintPath>
@@ -103,9 +109,9 @@
   <ItemGroup>
     <Compile Include="AuthModule.cs" />
     <Compile Include="AutoMapperResolvers\SoundCloudMetaResolver.cs" />
-    <Compile Include="AutoMapperResolvers\ISoundCloudMetaResolver.cs" />
     <Compile Include="Beans\SoundCloudMetaDto.cs" />
     <Compile Include="Beans\TrackDto.cs" />
+    <Compile Include="CouchDB\CouchDBService.cs" />
     <Compile Include="DistModule.cs" />
     <Compile Include="Mailing\MailgunService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

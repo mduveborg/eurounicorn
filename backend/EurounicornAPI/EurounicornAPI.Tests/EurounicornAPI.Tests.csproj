@@ -81,6 +81,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CouchTests.cs" />
     <Compile Include="SimpleMailTests.cs" />
     <Compile Include="StatusOK.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -97,6 +98,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
