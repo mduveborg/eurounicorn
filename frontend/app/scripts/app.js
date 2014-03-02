@@ -36,7 +36,8 @@ angular.module('frontendApp', [
 			controller: 'LoginCtrl'
 		})
 		.when('/list', {
-			templateUrl: 'views/list.html'
+			templateUrl: 'views/list.html',
+			controller: 'ListCtrl'
 		})
             .when('/submission', {
                 templateUrl: 'views/submission.html',
