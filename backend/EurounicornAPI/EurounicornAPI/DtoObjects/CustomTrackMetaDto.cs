@@ -8,7 +8,13 @@ namespace EurounicornAPI.DtoObjects
 {
     public class CustomTrackMetaDto //: CouchObject
     {
+        // Connection to sound cloud
         public int TrackId;
-        public string Author;
+        
+        // Custom meta information
+        public string SongTitle;
+        public string StageName;
+        public string Musicians;
+        public string Composers;
     }
 }
