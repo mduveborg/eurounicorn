@@ -35,6 +35,13 @@ angular.module('frontendApp', [
 			templateUrl: 'views/login.html',
 			controller: 'LoginCtrl'
 		})
+		.when('/logout', {
+			templateUrl: 'views/login.html',
+			controller: function ($location, auth) {
+				auth.setToken(null);
+				$location.path('/login');
+			}
+		})
 		.when('/list', {
 			templateUrl: 'views/list.html',
 			controller: 'ListCtrl',
