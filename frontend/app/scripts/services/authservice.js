@@ -55,7 +55,6 @@ angular.module('frontendApp.Services', [])
 					data: { input: input }
 				})
 					.success(function (data) {
-						auth.setToken(data.token);
 						deferred.resolve(true);
 					})
 					.error(function (data) {
@@ -69,6 +68,9 @@ angular.module('frontendApp.Services', [])
 			},
 			getToken: function () {
 				return auth.getToken();
-			}
+			},
+			setToken: function (token) {
+				auth.setToken(token);
+		    }
 		};
 	}]);

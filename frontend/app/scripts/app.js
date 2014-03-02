@@ -1,6 +1,10 @@
 'use strict';
 var checkAuthResolver = ['$q', '$location', 'authService', function ($q, $location, auth) {
 	var deferred = $q.defer();
+	if ($location.search().token) {
+		auth.setToken($location.search().token);
+		$location.search('token', null);
+	}
 	if (auth.isAuthenticated()) {
 		deferred.resolve(true);
 	} else {
