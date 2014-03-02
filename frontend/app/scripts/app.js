@@ -42,10 +42,13 @@ angular.module('frontendApp', [
 				factory: checkAuthResolver
 			}
 		})
-            .when('/submission', {
-                templateUrl: 'views/submission.html',
-                controller: 'SubmissionCtrl'
-            })
+		.when('/submission', {
+			templateUrl: 'views/submission.html',
+			controller: 'SubmissionCtrl',
+			resolve: {
+				factory: checkAuthResolver
+			}
+		})
 		.otherwise({
 			redirectTo: '/'
 		});

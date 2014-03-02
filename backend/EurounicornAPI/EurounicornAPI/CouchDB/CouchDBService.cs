@@ -48,9 +48,9 @@ namespace EurounicornAPI.CouchDB
                     {
                         Map = "function(doc) {\n  emit(doc.docType, doc);\n}"
                     },
-                    byToken = new 
+                    byUsername = new 
                     {
-                        Map = "function (doc) { emit(doc.token, doc); }"
+                        Map = "function (doc) { emit(doc.Username, doc); }"
                     },
                     byTrackId = new
                     {
@@ -81,12 +81,12 @@ namespace EurounicornAPI.CouchDB
             return doc != null ? doc.ToObject<T>() : null;
         }
 
-        public IEnumerable<T> FindByToken<T>(string token) where T : class
+        public IEnumerable<T> FindByUsername<T>(string username) where T : class
         {
-            var tokens = database.View<T>("byToken", new ViewOptions
+            var tokens = database.View<T>("byUsername", new ViewOptions
             {
                 Stale = false,
-                Key = new KeyOptions(token)
+                Key = new KeyOptions(username)
             });
             return tokens.Items;
         }
