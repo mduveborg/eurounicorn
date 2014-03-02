@@ -10,5 +10,6 @@ namespace EurounicornAPI.DtoObjects
         public int Id;
         public string Title;
         public SoundCloudMetaDto SoundCloudMeta;
+        public CustomTrackMetaDto CustomTrackMeta;
     }
 }

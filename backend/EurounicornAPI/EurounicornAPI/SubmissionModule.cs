@@ -10,6 +10,8 @@ using Ewk.SoundCloud.ApiLibrary.Entities;
 using AutoMapper;
 using EurounicornAPI.AutoMapperResolvers;
 using EurounicornAPI.DtoObjects;
+using EurounicornAPI.CouchDB;
+using Newtonsoft.Json.Linq;
 
 namespace EurounicornAPI
 {
@@ -56,7 +58,32 @@ namespace EurounicornAPI
                         dtoList.Add(Mapper.Map<TrackDto>(trackList[i]));
                     }
 
-                    return Response.AsJson(dtoList, HttpStatusCode.OK);
+                    // Get other track information stored in CouchDB
+                    var db = new CouchDBService();
+                    /*
+                    for (int i = 0; i < dtoList.Count; i++)
+                    {
+                        TrackDto dto = dtoList[i];
+                        string trackId = dto.Id.ToString();
+                        string json = db.Get<string>(trackId);
+
+                    }
+                    */
+                    //CustomTrackMetaDto test = db.Get<CustomTrackMetaDto>("Track-137067590");
+                    //GetByTrackId
+                    //CustomTrackMetaDto test = db.Get<CustomTrackMetaDto>("dac67264978feedb8f6322476700e7d8");
+                    JToken[] test = db.GetByTrackId<CustomTrackMetaDto>(137067590).ToArray();
+
+                    //dtoList[0].CustomTrackMeta = test;
+                    
+                    /*
+                    CustomTrackMetaDto test = new CustomTrackMetaDto();
+                    test.TrackId = 137067590;
+                    test.Author = "TestAuthor";
+                    string id = db.Set<CustomTrackMetaDto>(test);
+                    */
+
+                    return Response.AsJson(test, HttpStatusCode.OK);
                 });
             };
         }
