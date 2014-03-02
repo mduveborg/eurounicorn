@@ -15,4 +15,7 @@ angular.module('frontendApp')
 			'AngularJS',
 			'Karma'
 		];
+        $scope.isActive = function (viewLocation) {
+            return viewLocation === $location.path();
+        };
 	});

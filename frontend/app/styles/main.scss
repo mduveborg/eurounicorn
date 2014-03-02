@@ -109,6 +109,13 @@ ul.nav li.active a {
     }
 }
 
+//nav
+$defaultPadding:5px;
+.nav{
+  padding-bottom: $defaultPadding;
+  padding-top: $defaultPadding;
+}
+
 //Submission
 $defaultMargin:5px;
 .submission{
