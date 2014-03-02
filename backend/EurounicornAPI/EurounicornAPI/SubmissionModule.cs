@@ -9,6 +9,7 @@ using System.Web;
 using Ewk.SoundCloud.ApiLibrary.Entities;
 using AutoMapper;
 using EurounicornAPI.AutoMapperResolvers;
+using EurounicornAPI.DtoObjects;
 
 namespace EurounicornAPI
 {
