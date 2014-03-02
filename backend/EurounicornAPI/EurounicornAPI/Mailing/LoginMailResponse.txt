@@ -4,7 +4,7 @@ I am looking forward to hearing you sing!
 
 From now on you are invited to our super secret site, you can access it by clicking the link below:
 
-http://{0}/?token={1}
+http://{0}/#/?token={1}
 
 Check it out, why don't ya!
 /Rarity & friends @ Unieurocornlightvision

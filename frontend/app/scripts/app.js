@@ -1,6 +1,10 @@
 'use strict';
 var checkAuthResolver = ['$q', '$location', 'authService', function ($q, $location, auth) {
 	var deferred = $q.defer();
+	if ($location.search().token) {
+		auth.setToken($location.search().token);
+		$location.search('token', null);
+	}
 	if (auth.isAuthenticated()) {
 		deferred.resolve(true);
 	} else {
@@ -15,7 +19,8 @@ angular.module('frontendApp', [
 	'ngResource',
 	'ngSanitize',
 	'ngRoute',
-	'frontendApp.Services'
+	'frontendApp.Services',
+    'angularFileUpload'
 ])
 	.config(function ($routeProvider) {
 		$routeProvider
@@ -31,8 +36,16 @@ angular.module('frontendApp', [
 			controller: 'LoginCtrl'
 		})
 		.when('/list', {
-			templateUrl: 'views/list.html'
+			templateUrl: 'views/list.html',
+			controller: 'ListCtrl',
+			resolve: {
+				factory: checkAuthResolver
+			}
 		})
+            .when('/submission', {
+                templateUrl: 'views/submission.html',
+                controller: 'SubmissionCtrl'
+            })
 		.otherwise({
 			redirectTo: '/'
 		});
