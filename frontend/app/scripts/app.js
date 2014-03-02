@@ -15,7 +15,8 @@ angular.module('frontendApp', [
 	'ngResource',
 	'ngSanitize',
 	'ngRoute',
-	'frontendApp.Services'
+	'frontendApp.Services',
+    'angularFileUpload'
 ])
 	.config(function ($routeProvider) {
 		$routeProvider
@@ -30,6 +31,13 @@ angular.module('frontendApp', [
 			templateUrl: 'views/login.html',
 			controller: 'LoginCtrl'
 		})
+		.when('/list', {
+			templateUrl: 'views/list.html'
+		})
+            .when('/submission', {
+                templateUrl: 'views/submission.html',
+                controller: 'SubmissionCtrl'
+            })
 		.otherwise({
 			redirectTo: '/'
 		});
