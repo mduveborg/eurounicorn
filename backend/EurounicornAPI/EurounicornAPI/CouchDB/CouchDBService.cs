@@ -51,6 +51,10 @@ namespace EurounicornAPI.CouchDB
                     byToken = new 
                     {
                         Map = "function (doc) { emit(doc.token, doc); }"
+                    },
+                    byTrackId = new
+                    {
+                        Map = "function(doc) { emit(doc.TrackId, doc); }"
                     }
                 }
             };
@@ -96,6 +100,16 @@ namespace EurounicornAPI.CouchDB
             });
             return test.Rows.Select(r => r.Value<JToken>("value")).ToList();
         }   
+
+        public IEnumerable<T> FindByTrackId<T>(int trackId) where T : class
+        {
+            var trackMetaObjects = database.View<T>("byTrackId", new ViewOptions
+            {
+                Stale = false,
+                Key = new KeyOptions(trackId)
+            });
+            return trackMetaObjects.Items;
+        }
 
         public void Delete(IEnumerable<JToken> tokens)
         {

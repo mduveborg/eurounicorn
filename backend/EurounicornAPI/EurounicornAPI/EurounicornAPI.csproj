@@ -122,8 +122,9 @@
     <Compile Include="Authentication\UserIdentity.cs" />
     <Compile Include="AuthModule.cs" />
     <Compile Include="AutoMapperResolvers\SoundCloudMetaResolver.cs" />
-    <Compile Include="Beans\SoundCloudMetaDto.cs" />
-    <Compile Include="Beans\TrackDto.cs" />
+    <Compile Include="DtoObjects\CustomTrackMetaDto.cs" />
+    <Compile Include="DtoObjects\SoundCloudMetaDto.cs" />
+    <Compile Include="DtoObjects\TrackDto.cs" />
     <Compile Include="CouchDB\CouchDBService.cs" />
     <Compile Include="DistModule.cs" />
     <Compile Include="LoginModule.cs" />
