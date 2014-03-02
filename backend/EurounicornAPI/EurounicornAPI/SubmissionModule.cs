@@ -12,7 +12,7 @@ using EurounicornAPI.AutoMapperResolvers;
 
 namespace EurounicornAPI
 {
-    public class SubmissionModule : NancyModule
+    public class SubmissionModule : AuthModule
     {
         public SubmissionModule() : base("api/submissions")
         {
@@ -22,13 +22,15 @@ namespace EurounicornAPI
                 {
                     var file = this.Request.Files.FirstOrDefault();
                     string filename = file.Name;
-                    string title = this.Request.Query.Title ?? filename;
+                    string title = this.Request.Form.Title;
+                    if (title == null)
+                        title = filename;
                     var cloudService = new SoundCloudService();
                     cloudService.Upload(new UploadTrack()
                     {
                         Title = title,
                         Filename = filename,
-                        Data = file.Value
+                        Data = file.Value,
                     });
                     return HttpStatusCode.OK;
                 });

@@ -11,7 +11,7 @@ namespace EurounicornAPI.Tests
     [TestClass]
     public class CouchTests
     {
-        public class Data
+        public class Data : CouchObject
         {
             public string docType { get { return "Test"; } }
             public string value { get; set; }

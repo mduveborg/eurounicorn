@@ -1,8 +1,12 @@
-﻿using Nancy;
+﻿using EurounicornAPI.Authentication;
+using EurounicornAPI.CouchDB;
+using Nancy;
 using Nancy.Security;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Web;
 
 namespace EurounicornAPI
@@ -11,38 +15,50 @@ namespace EurounicornAPI
     {
         public AuthModule()
         {
-            Before += ctx =>
+            init();
+            Before += AuthenticateRequest;
+        }
+
+        public AuthModule(string modulePath) : base(modulePath)
+        {
+            init();
+            Before += AuthenticateRequest;
+        }
+
+        private Response AuthenticateRequest(NancyContext ctx)
+        {
+            if (this.Request.Headers.Authorization == "supersecretrandomkey")
             {
-                var user = FindUser(this.Request.Headers.Authorization);
-                if (user != null)
-                {
-                    ctx.CurrentUser = user;
-                    return null;
-                }
-                return HttpStatusCode.Unauthorized;
-            };
+                ctx.CurrentUser = new UserIdentity { UserName = "Dev" };
+                return null;
+            }
+            var user = Authenticate(this.Request.Headers.Authorization);
+            if (user != null)
+            {
+                ctx.CurrentUser = user;
+                return null;
+            }
+            return HttpStatusCode.Unauthorized;
         }
 
-        private IUserIdentity FindUser(string authorization)
+        CouchDBService db;
+        TokenService tokenService;
+        private void init()
         {
-            if (authorization == "dev")
-                return new UserIdentity { UserName = "Unieurocorn" };
-            return null;
-        }
-    }
-
-    public class UserIdentity : IUserIdentity
-    {
-
-        public IEnumerable<string> Claims
-        {
-            get { yield break; }
+            db = new CouchDBService();
+            tokenService = new TokenService(db);
         }
 
-        public string UserName
+        private IUserIdentity Authenticate(string authorization)
         {
-            get;
-            set;
+            var user = tokenService.FindUser(authorization);
+            if (user == null)
+            {
+                Random r = new Random();
+                Thread.Sleep(r.Next(500));
+                return null;
+            }
+            return user;
         }
     }
 }

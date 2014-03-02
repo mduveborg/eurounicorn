@@ -12,6 +12,14 @@ using System.Web;
 
 namespace EurounicornAPI.CouchDB
 {
+    public class CouchObject
+    {
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public string _id { get; set; }
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public string _rev { get; set; }
+    }
+
     public class CouchDBService
     {
         CouchClient client;
@@ -39,10 +47,18 @@ namespace EurounicornAPI.CouchDB
                     byDocType = new
                     {
                         Map = "function(doc) {\n  emit(doc.docType, doc);\n}"
+                    },
+                    byToken = new 
+                    {
+                        Map = "function (doc) { emit(doc.token, doc); }"
                     }
                 }
             };
-            var res = database.CreateDocument(doc._id, JsonConvert.SerializeObject(doc, Formatting.Indented, settings));
+            var prev = database.GetDocument(doc._id);
+            if (prev != null)
+                database.DeleteDocument(prev.Id, prev.Rev);
+            database.CreateDocument(doc._id, JsonConvert.SerializeObject(doc, Formatting.Indented, settings));
+
 
             database.SetDefaultDesignDoc(designDoc);
         }
@@ -61,14 +77,25 @@ namespace EurounicornAPI.CouchDB
             return doc != null ? doc.ToObject<T>() : null;
         }
 
+        public IEnumerable<T> FindByToken<T>(string token) where T : class
+        {
+            var tokens = database.View<T>("byToken", new ViewOptions
+            {
+                Stale = false,
+                Key = new KeyOptions(token)
+            });
+            return tokens.Items;
+        }
+
         public IEnumerable<JToken> GetByDocType<T>(string docType) where T : class
         {
             var test = database.View("byDocType", new ViewOptions
             {
-                Stale = false
+                Stale = false,
+                Key = new KeyOptions(docType)
             });
             return test.Rows.Select(r => r.Value<JToken>("value")).ToList();
-        }
+        }   
 
         public void Delete(IEnumerable<JToken> tokens)
         {
@@ -76,6 +103,11 @@ namespace EurounicornAPI.CouchDB
             {
                 database.DeleteDocument(token.Value<string>("_id"), token.Value<string>("_rev"));
             }
+        }
+
+        public void Delete(CouchObject obj)
+        {
+            database.DeleteDocument(obj._id, obj._rev);
         }
     }
 }

@@ -26,5 +26,24 @@ namespace EurounicornAPI.Mailing
             request.Method = Method.POST;
             return client.Execute(request);
         }
+
+        public static IRestResponse SendMail(string email, string subject, string body)
+        {
+            RestClient client = new RestClient();
+            client.BaseUrl = "https://api.mailgun.net/v2";
+            client.Authenticator =
+                   new HttpBasicAuthenticator("api",
+                                              "key-2tm-xybgf7nkh-7yssk0ug34ciaj5ld9");
+            RestRequest request = new RestRequest();
+            request.AddParameter("domain",
+                                "eurounicorn.func.is", ParameterType.UrlSegment);
+            request.Resource = "eurounicorn.func.is/messages";
+            request.AddParameter("from", "Rarity <rarity@eurounicorn.func.is>");
+            request.AddParameter("to", email);
+            request.AddParameter("subject", subject);
+            request.AddParameter("text", body);
+            request.Method = Method.POST;
+            return client.Execute(request);
+        }
     }
 }
