@@ -54,11 +54,13 @@ namespace EurounicornAPI.SoundCloud
 
         private static string tooken;
 
-        public void Upload(UploadTrack track, string token = null)
+        public string Upload(UploadTrack track, string token = null)
         {
             if (token == null)
                 token = GetAccessToken();
-            UploadTrack(track.Data, token, track.Title, track.Filename);
+            string response = UploadTrack(track.Data, token, track.Title, track.Filename);
+            
+            return response;
         }
 
         public void DeleteTrack(string title, string token = null)

@@ -12,6 +12,7 @@ using EurounicornAPI.AutoMapperResolvers;
 using EurounicornAPI.DtoObjects;
 using EurounicornAPI.CouchDB;
 using Newtonsoft.Json.Linq;
+using System.Text.RegularExpressions;
 
 namespace EurounicornAPI
 {
@@ -29,12 +30,31 @@ namespace EurounicornAPI
                     if (title == null)
                         title = filename;
                     var cloudService = new SoundCloudService();
-                    cloudService.Upload(new UploadTrack()
+                    string response = cloudService.Upload(new UploadTrack()
                     {
                         Title = title,
                         Filename = filename,
                         Data = file.Value,
                     });
+
+                    // Get the track id of the uploaded track
+                    int trackId = -1;
+                    Match match = Regex.Match(response, "^.*\"id\":([0-9]*);.*$");
+                    if (match.Success) trackId = Convert.ToInt32(match.Groups[1].Value);
+
+                    // Store custom meta information to database.
+                    if (trackId > 0)
+                    {
+                        CustomTrackMetaDto dto = new CustomTrackMetaDto();
+                        dto.TrackId = trackId;
+
+                        // Add the meta information
+                        dto.Author = "TestAuthor2";
+
+                        var db = new CouchDBService();
+                        db.Set<CustomTrackMetaDto>(dto);
+                    }
+
                     return HttpStatusCode.OK;
                 });
             };
@@ -60,30 +80,18 @@ namespace EurounicornAPI
 
                     // Get other track information stored in CouchDB
                     var db = new CouchDBService();
-                    /*
                     for (int i = 0; i < dtoList.Count; i++)
                     {
                         TrackDto dto = dtoList[i];
-                        string trackId = dto.Id.ToString();
-                        string json = db.Get<string>(trackId);
-
+                        
+                        // Add custom meta information
+                        CustomTrackMetaDto meta = null;
+                        CustomTrackMetaDto[] metaObjects = db.FindByTrackId<CustomTrackMetaDto>(dto.Id).ToArray();
+                        if (metaObjects.Length > 0) meta = metaObjects[0];
+                        dto.CustomTrackMeta = meta;
                     }
-                    */
-                    //CustomTrackMetaDto test = db.Get<CustomTrackMetaDto>("Track-137067590");
-                    //GetByTrackId
-                    //CustomTrackMetaDto test = db.Get<CustomTrackMetaDto>("dac67264978feedb8f6322476700e7d8");
-                    JToken[] test = db.GetByTrackId<CustomTrackMetaDto>(137067590).ToArray();
 
-                    //dtoList[0].CustomTrackMeta = test;
-                    
-                    /*
-                    CustomTrackMetaDto test = new CustomTrackMetaDto();
-                    test.TrackId = 137067590;
-                    test.Author = "TestAuthor";
-                    string id = db.Set<CustomTrackMetaDto>(test);
-                    */
-
-                    return Response.AsJson(test, HttpStatusCode.OK);
+                    return Response.AsJson(dtoList, HttpStatusCode.OK);
                 });
             };
         }
