@@ -33,6 +33,9 @@ namespace EurounicornAPI
                     var file = this.Request.Files.FirstOrDefault();
                     string filename = file.Name;
                     string title = this.Request.Form.Title;
+                    string username = this.Context.CurrentUser.UserName;
+                    if (file == null || string.IsNullOrEmpty(filename) || string.IsNullOrEmpty(username))
+                        return HttpStatusCode.BadRequest;
                     if (title == null)
                         title = filename;
                     var cloudService = new SoundCloudService();
@@ -51,7 +54,7 @@ namespace EurounicornAPI
                     {
                         CustomTrackMetaDto dto = new CustomTrackMetaDto();
                         dto.TrackId = trackId;
-
+                        dto.Username = username;
                         // Add the meta information
                         dto.SongTitle = this.Request.Form.SongTitle;
                         dto.StageName = this.Request.Form.StageName;

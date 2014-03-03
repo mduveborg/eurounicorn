@@ -11,6 +11,7 @@ namespace EurounicornAPI.DtoObjects
         // Connection to sound cloud
         public int TrackId;
         public string docType { get { return "track"; } }
+        public string Username;
         
         // Custom meta information
         public string SongTitle;
