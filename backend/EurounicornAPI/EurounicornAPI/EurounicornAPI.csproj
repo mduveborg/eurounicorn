@@ -169,8 +169,8 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
-    <PreBuildEvent>rd /s /q $(ProjectDir)\dist
-xcopy "$(SolutionDir)..\..\frontend\dist\*.*" "$(ProjectDir)\dist\*.*" /Y /I /E</PreBuildEvent>
+    <PreBuildEvent>
+    </PreBuildEvent>
   </PropertyGroup>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
