@@ -1,7 +1,7 @@
 <div class="jumbotron">
 	<div ng-repeat="track in playlist">
 		<h2>{{ track.title }} - {{ track.customTrackMeta.stageName }}</h2>
-		<h4>{{ track.customTrackMeta.composers }} & {{ track.customTrackMeta.musicians }}</h2>
+		<h4>{{ track.customTrackMeta.composers }} & {{ track.customTrackMeta.musicians }}</h4>
 		<div ng-bind-html="trust(track.embed)">
 
 		</div>
