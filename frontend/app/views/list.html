@@ -1,4 +1,7 @@
 <div class="jumbotron">
+	<div ng-hide="playlist && playlist.length > 0">
+		Sorry, there is nothing here yet. Why don't you go record a submission?
+	</div>
 	<div ng-repeat="track in playlist">
 		<h2>{{ track.title }} - {{ track.customTrackMeta.stageName }}</h2>
 		<h4>{{ track.customTrackMeta.composers }} & {{ track.customTrackMeta.musicians }}</h4>
@@ -7,8 +10,4 @@
 		</div>
 	</div>
 	
-</div>
-
-<div class="footer">
-  <p>Love from the Unicorn</p>
 </div>
