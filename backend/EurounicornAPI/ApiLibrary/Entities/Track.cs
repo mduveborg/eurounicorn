@@ -17,6 +17,8 @@ namespace Ewk.SoundCloud.ApiLibrary.Entities
         /// <example>123</example>
         public int id { get; set; }
 
+        public string secret_token { get; set; }
+
         /// <summary>
         /// Timestamp of creation
         /// </summary>

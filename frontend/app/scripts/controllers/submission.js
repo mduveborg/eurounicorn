@@ -1,35 +1,24 @@
 'use strict';
 
 angular.module('frontendApp')
-    .controller('SubmissionCtrl', function ($scope, $upload) {
-        var url = 'http://unieurocornlightvision.azurewebsites.net/api/submissions';
+    .controller('SubmissionCtrl', function ($scope, $upload, $location) {
+        var toUpload = [];
+		$scope.submit = function (user) {
+			$scope.message = "This unicorn is busy running your submission over to the unicorn base, so please be patient!";
+			$upload.upload({
+				url: '/api/submissions',
+				method: 'POST',
+				data: user,
+				file: toUpload[0]
+			}).progress(function (evt) {
+			}).success(function(data, status, headers, config) {
+				$location.path('/list');
+			})
+			.error( function(data){
+				$scope.message = "Something unfortunate happened! And we are quite unsure what to do...";
+			});
+		};
         $scope.onFileSelect = function($files) {
-            //$files: an array of files selected, each file has name, size, and type.
-            for (var i = 0; i < $files.length; i++) {
-                var file = $files[i];
-                $scope.upload = $upload.upload({
-                    url: url,
-                    method: 'POST',
-                    //headers: {'Authorization': 'supersecretrandomkey'},
-                    //withCredentials: true,
-                    file: file
-                    //data: {myObj: $scope.myModelObj},
-                    // file: $files, //upload multiple files, this feature only works in HTML5 FromData browsers
-                    /* set file formData name for 'Content-Desposition' header. Default: 'file' */
-                    //fileFormDataName: myFile, //OR for HTML5 multiple upload only a list: ['name1', 'name2', ...]
-                    /* customize how data is added to formData. See #40#issuecomment-28612000 for example */
-                    //formDataAppender: function(formData, key, val){} //#40#issuecomment-28612000
-                }).progress(function(evt) {
-                        console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
-                    }).success(function(data, status, headers, config) {
-                        // file is uploaded successfully
-                        console.log(data);
-                    })
-                    .error( function(data){
-                        alert("error" + data); //TODO: Fix better logging.
-                    });
-                //.then(success, error, progress);
-            }
-            // $scope.upload = $upload.upload({...}) alternative way of uploading, sends the the file content directly with the same content-type of the file. Could be used to upload files to CouchDB, imgur, etc... for HTML5 FileReader browsers.
+			toUpload = $files;
         };
     });
