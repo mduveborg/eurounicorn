@@ -49,8 +49,8 @@ namespace EurounicornAPI
             {
                 var token = tokens.Login(email);
                 var combine = string.Format("{0}!{1}", email, token);
-                var link = string.Format("RainbowLink<{0}/#/?token={1}>", this.Request.Url.SiteBase, combine);
-                return body.Replace("!!link!!", link);
+                var link = string.Format(@"<a href=""{0}/#/?token={1}"">your secret key</a>", this.Request.Url.SiteBase, combine);
+                return body.Replace("!!link!!", link) + "<br><br> Sent on behalf of " + email;
             }
             return body;
         }

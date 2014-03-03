@@ -22,6 +22,19 @@ namespace EurounicornAPI
     //"created_at":"2014/03/03 01:02:24 +0000",
     //"user_id":81598671,"duration":0,"commentable":true,"state":"processing","original_content_size":null,"sharing":"private","tag_list":"","permalink":"213123-1","streamable":true,"embeddable_by":"all","downloadable":false,"purchase_url":null,"label_id":null,"purchase_title":null,"genre":null,"title":"213123","description":null,"label_name":null,"release":null,"track_type":null,"key_signature":null,"isrc":null,"video_url":null,"bpm":null,"release_year":null,"release_month":null,"release_day":null,"original_format":"unknown","license":"all-rights-reserved","uri":"https://api.soundcloud.com/tracks/137616160","user":{"id":81598671,"kind":"user","permalink":"eurounicorn","username":"eurounicorn","uri":"https://api.soundcloud.com/users/81598671","permalink_url":"http://soundcloud.com/eurounicorn","avatar_url":"https://a1.sndcdn.com/images/default_avatar_large.png?435a760"},"shared_to_count":0,"user_playback_count":1,"user_favorite":false,"permalink_url":"http://soundcloud.com/eurounicorn/213123-1","artwork_url":null,"waveform_url":"https://a1.sndcdn.com/images/player-waveform-medium.png?435a760","stream_url":"https://api.soundcloud.com/tracks/137616160/stream","download_url":"https://api.soundcloud.com/tracks/137616160/download","playback_count":0,"download_count":0,"favoritings_count":0,"comment_count":0,"attachments_uri":"https://api.soundcloud.com/tracks/137616160/attachments","secret_token":"s-TH2OS","secret_uri":"https://api.soundcloud.com/tracks/137616160?secret_token=s-TH2OS","downloads_remaining":100}
 
+    public class SubmissionEvent
+    {
+        public DateTime At
+        {
+            get;
+            set;
+        }
+
+        public string Username { get; set; }
+
+        public string docType { get { return "submissionEvent"; } }
+    }
+
     public class SubmissionModule : AuthModule
     {
         public SubmissionModule() : base("api/submissions")
@@ -45,6 +58,7 @@ namespace EurounicornAPI
                         Filename = filename,
                         Data = file.Value,
                     });
+                    db.Set(new AuthEvent() { At = DateTime.UtcNow, Username = username });
 
                     // Get the track id of the uploaded track
                     int trackId = response.id;
@@ -61,7 +75,6 @@ namespace EurounicornAPI
                         dto.Musicians = this.Request.Form.Musicians;
                         dto.Composers = this.Request.Form.Composers;
                         
-                        var db = new CouchDBService();
                         db.Set<CustomTrackMetaDto>(dto);
                     }
 

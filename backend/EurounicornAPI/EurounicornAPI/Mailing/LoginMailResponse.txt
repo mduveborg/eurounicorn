@@ -1,10 +1,14 @@
-﻿Hello dear!
+﻿<h2>Hello dear!</h2>
 
+<p>
 I am looking forward to hearing you sing!
+</p>
+<p>
+From now on you are invited to our super secret site, you can access it by clicking this <a href="{0}/#/?token={1}">super secret link</a>!
+</p>
 
-From now on you are invited to our super secret site, you can access it by clicking the link below:
-
-{0}/#/?token={1}
-
+<p>
 Check it out, why don't ya!
-/Rarity & friends @ Unieurocornlightvision
+<br>
+<strong>/Rarity & friends @ Unieurocornlightvision</strong>
+</p>

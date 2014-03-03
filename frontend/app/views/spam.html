@@ -3,8 +3,9 @@
 		<span>With great power comes great responsibility, handle the spam'o'mat with care!</span>
 		<form class="submission ng-pristine ng-valid" role="form" ng-submit="submit(sub)">
 			<input type="text" ng-model="sub.subject" class="form-control" placeholder="Subject">
-			<p>You can use \{\{ link \}\} to insert login link</p>
+			<p>You can use !!link!! to insert login link</p>
 			<textarea placeholder="Body" class="spam-body" ng-model="sub.body"></textarea>
+			<p>Add recipients in a text file with one @Netlight per row</p>
 			<label>Recipients: </label>
 			<input type="file" ng-file-select="onFileSelect($files)" class="custom-file-input">
 			<button type="submit" class="btn btn-lg btn-success">Submit</button>

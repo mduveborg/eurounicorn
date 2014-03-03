@@ -14,6 +14,16 @@ var checkAuthResolver = ['$q', '$location', 'authService', function ($q, $locati
 	return deferred.promise;
 }];
 
+var signinResolver = ['$q', '$location', 'authService', function ($q, $location, auth) {
+	var deferred = $q.defer();
+	if ($location.search().token) {
+		auth.setToken($location.search().token);
+		$location.search('token', null);
+	}
+	deferred.resolve(true);
+	return deferred.promise;
+}];
+
 angular.module('frontendApp', [
 	'ngCookies',
 	'ngResource',
@@ -26,11 +36,17 @@ angular.module('frontendApp', [
 		$routeProvider
 		.when('/', {
 			templateUrl: 'views/main.html',
-			controller: 'MainCtrl'
+			controller: 'MainCtrl',
+			resolve: {
+				factory: signinResolver
+			}
 		})
 		.when('/login', {
 			templateUrl: 'views/login.html',
-			controller: 'LoginCtrl'
+			controller: 'LoginCtrl',
+			resolve: {
+				factory: signinResolver
+			}
 		})
 		.when('/logout', {
 			templateUrl: 'views/login.html',
