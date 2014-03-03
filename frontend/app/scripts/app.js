@@ -39,6 +39,10 @@ angular.module('frontendApp', [
 				$location.path('/login');
 			}
 		})
+		.when('/spam', {
+			templateUrl: 'views/spam.html',
+			controller: 'SpamCtrl'
+		})
 		.when('/list', {
 			templateUrl: 'views/list.html',
 			controller: 'ListCtrl',
