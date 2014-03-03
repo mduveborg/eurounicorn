@@ -104,11 +104,10 @@ namespace EurounicornAPI.SoundCloud
             return tokenInfo;
         }
 
-        public async Task<IEnumerable<Track>> GetTracksAsync(string token)
+        public IEnumerable<Track> GetTracks(string token)
         {
             var cloud = new Ewk.SoundCloud.ApiLibrary.SoundCloud(ClientId, token);
-            var test = cloud.Me.Get();
-            return await cloud.Me.Tracks.GetAsync();
+            return cloud.Me.Tracks.Get();
         }
 
         private UploadResponse UploadTrack(Stream data, string token, string title, string filename)

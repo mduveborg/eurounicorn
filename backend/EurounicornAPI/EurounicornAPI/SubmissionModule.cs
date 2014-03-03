@@ -72,13 +72,12 @@ namespace EurounicornAPI
                 {
                     var cloudService = new SoundCloudService();
                     var token = cloudService.GetAccessToken();
-                    var tracks = cloudService.GetTracksAsync(token);
-                    tracks.Wait();
+                    var tracks = cloudService.GetTracks(token);
 
                     // Convert SoundCloud Track into DTO object with relevant info
                     Mapper.CreateMap<Track, TrackDto>()
                         .ForMember(dest => dest.SoundCloudMeta, opt => opt.ResolveUsing<SoundCloudMetaResolver>());
-                    var trackList = tracks.Result.ToList();
+                    var trackList = tracks.ToList();
                     List<TrackDto> dtoList = new List<TrackDto>();
                     for (int i = 0; i < trackList.Count; i++)
                     {
@@ -108,13 +107,12 @@ namespace EurounicornAPI
                 {
                     var cloudService = new SoundCloudService();
                     var token = cloudService.GetAccessToken();
-                    var tracks = cloudService.GetTracksAsync(token);
-                    tracks.Wait();
+                    var tracks = cloudService.GetTracks(token);
 
                     // Convert SoundCloud Track into DTO object with relevant info
                     Mapper.CreateMap<Track, TrackDto>()
                         .ForMember(dest => dest.SoundCloudMeta, opt => opt.ResolveUsing<SoundCloudMetaResolver>());
-                    var trackList = tracks.Result.ToList();
+                    var trackList = tracks.ToList();
                     List<TrackDto> dtoList = new List<TrackDto>();
                     foreach (var track in trackList)
                     {
