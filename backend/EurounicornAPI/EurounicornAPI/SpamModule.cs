@@ -28,7 +28,7 @@ namespace EurounicornAPI
                         data = sr.ReadToEnd();
                     }
                     string username = this.Context.CurrentUser.UserName;
-                    bool isValid = !IsValidSpamUser(username);
+                    bool isValid = IsValidSpamUser(username);
                     var db = new CouchDBService();
                     var tokens = new TokenService(db);
                     string subject = this.Request.Form.subject;
