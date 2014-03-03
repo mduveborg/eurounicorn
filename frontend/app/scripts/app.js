@@ -26,10 +26,7 @@ angular.module('frontendApp', [
 		$routeProvider
 		.when('/', {
 			templateUrl: 'views/main.html',
-			controller: 'MainCtrl',
-			resolve: {
-				factory: checkAuthResolver
-			}
+			controller: 'MainCtrl'
 		})
 		.when('/login', {
 			templateUrl: 'views/login.html',
