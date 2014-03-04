@@ -26,7 +26,7 @@
 
     <!-- Add your site or application content here -->
     <div class="container">
-    <div ng-controller="NavCtrl">
+    <div ng-controller="NavCtrl" ng-style="{visibility: isLogedIn && 'visible' || 'hidden'}">
       <ul class="nav nav-pills">
           <li ng-class="{ active: isActive('/')}"><a ng-href="#">Home</a></li>
           <li ng-class="{ active: isActive('/submission')}"><a ng-href="#submission">Submission</a></li>

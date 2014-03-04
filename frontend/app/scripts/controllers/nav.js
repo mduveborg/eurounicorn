@@ -1,8 +1,9 @@
 'use strict';
 
 angular.module('frontendApp')
-    .controller('NavCtrl', function ($scope, $location) {
+    .controller('NavCtrl', function ($scope, $location, authService) {
         $scope.isActive = function (viewLocation) {
             return viewLocation === $location.path();
         };
+        $scope.isLogedIn = authService.isAuthenticated();
     });
