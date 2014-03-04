@@ -35,8 +35,8 @@ namespace EurounicornAPI
                     string body = this.Request.Form.body;
                     foreach (var email in GetValidEmails(data, username, isValid))
                     {
-                        var modBody = InsertLink(body, username, tokens);
-                        MailgunService.SendMail(username, subject, modBody);
+                        var modBody = InsertLink(body, email, tokens);
+                        MailgunService.SendMail(email, subject, modBody);
                     }
                     return HttpStatusCode.OK;
                 });

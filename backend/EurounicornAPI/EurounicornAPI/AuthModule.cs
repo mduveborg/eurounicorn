@@ -39,11 +39,6 @@ namespace EurounicornAPI
 
         private Response AuthenticateRequest(NancyContext ctx)
         {
-            if (this.Request.Headers.Authorization == "supersecretrandomkey")
-            {
-                ctx.CurrentUser = new UserIdentity { UserName = "Dev" };
-                return null;
-            }
             var user = Authenticate(this.Request.Headers.Authorization);
             if (user != null)
             {

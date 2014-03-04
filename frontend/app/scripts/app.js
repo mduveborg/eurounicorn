@@ -41,6 +41,9 @@ angular.module('frontendApp', [
 				factory: signinResolver
 			}
 		})
+		.when('/rules', {
+			templateUrl: 'views/rules.html',
+		})
 		.when('/login', {
 			templateUrl: 'views/login.html',
 			controller: 'LoginCtrl',
