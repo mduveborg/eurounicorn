@@ -5,6 +5,9 @@ angular.module('frontendApp')
 		$scope.playlist = "Loading";
 		$scope.trust = $sce.trustAsHtml;
 		$scope.join = function (a, b, ch) {
+			if (a == b) {
+				return a;
+			}
 			if (a && b) {
 				return a + ' ' + ch + ' ' + b;
 			}
