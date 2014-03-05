@@ -5,5 +5,5 @@ angular.module('frontendApp')
         $scope.isActive = function (viewLocation) {
             return viewLocation === $location.path();
         };
-        $scope.isLogedIn = authService.isAuthenticated();
+        $scope.isAuthenticated = authService.isAuthenticated;
     });
