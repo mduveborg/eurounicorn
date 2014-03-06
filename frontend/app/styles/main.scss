@@ -171,3 +171,8 @@ $defaultMargin:5px;
 .long-word{
   @include font-size(2.5);
 }
+
+.custom-file-input{
+  width:100%;
+  @include font-size(1.7);
+}
