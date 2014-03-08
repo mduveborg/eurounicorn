@@ -2,6 +2,7 @@ $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
 
 @import 'sass-bootstrap/lib/bootstrap';
 @import 'mixins';
+@import 'colors';
 
 html {
 
@@ -10,15 +11,15 @@ html {
 
 .browsehappy {
   margin: 0.2em 0;
-  background: #ccc;
-  color: #000;
+  background: $LightGrey;
+  color: $Black;
   padding: 0.2em 0;
 }
 
 /* Space out content a bit */
 body {
   /* Workaround for some mobile browsers */
-  background: url('/images/bkgnd.jpg') no-repeat center center;
+  background: url('../images/bkgnd.jpg') no-repeat center center;
   min-height: 100%;
   background-size: cover;
 }
@@ -26,25 +27,21 @@ body {
 /* Menu stylings */
 
 ul.nav li a {
-  color: #fff;
+  color: $White;
 }
 
 ul.nav li.active a {
-  background-color: #2B2050;
+  background-color: $NetlightPurple;
 }
 
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
 .marketing,
-.footer {
-  padding-left: 15px;
-  padding-right: 15px;
-}
 
 /* Custom page header */
 .header {
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid $LightGrey;
 }
 
 /* Make the masthead heading the same height as the navigation */
@@ -56,10 +53,10 @@ ul.nav li.active a {
 }
 
 /* Custom page footer */
-.footer {
-  color: #fff;
-  background-color: #2B2050;
-  height: 100px;
+#footer {
+  #logo-img{
+    border-radius: 6px;
+  }
 }
 
 .container-narrow > hr {
@@ -69,13 +66,13 @@ ul.nav li.active a {
 /* Main marketing message and sign up button */
 .jumbotron {
   text-align: center;
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid $LightGrey;
 }
 
 .jumbotron .btn {
   @include font-size(1.8);
   padding: 4px 24px;
-  background-color: #2B2050;
+  background-color: $NetlightPurple;
 }
 
 /* Supporting marketing content */
@@ -131,15 +128,15 @@ $defaultMargin:5px;
 .custom-file-input::before {
   content: 'Select file (.mp3)';
   display: inline-block;
-  background: -webkit-linear-gradient(top, #f9f9f9, #e3e3e3);
-  border: 1px solid #999;
+  background: -webkit-linear-gradient(top, $LightGrey, $LightGrey);
+  border: 1px solid $DarkGrey;
   border-radius: 3px;
   padding: 5px 8px;
   outline: none;
   white-space: nowrap;
   -webkit-user-select: none;
   cursor: pointer;
-  text-shadow: 1px 1px #fff;
+  text-shadow: 1px 1px $White;
   font-weight: 700;
   @include font-size(1.0);
 }
@@ -147,7 +144,7 @@ $defaultMargin:5px;
   border-color: black;
 }
 .custom-file-input:active::before {
-  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+  background: -webkit-linear-gradient(top, $LightGrey, $LightGrey);
 }
 
 .spam-body {
@@ -157,16 +154,15 @@ $defaultMargin:5px;
 	padding: 6px 12px;
 	@include font-size(1.4);
 	line-height: 1.428571429;
-	color: #555555;
+	color: $DarkGrey;
 	vertical-align: middle;
-	background-color: white;
+	background-color: $White;
 	background-image: none;
-	border: 1px solid #cccccc;
+	border: 1px solid $LightGrey;
 	border-radius: 4px;
 	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
 	transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 }
-
 
 .long-word{
   @include font-size(2.5);
