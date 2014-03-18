@@ -1,7 +1,6 @@
 'use strict';
 
-angular.module('frontendApp')
-    .controller('SubmissionCtrl', function ($scope, $upload, $location) {
+frontendApp.controller('SubmissionCtrl', function ($scope, $upload, $location) {
         var toUpload = [];
 		$scope.submit = function (user) {
 			$scope.message = "This unicorn is busy running your submission over to the unicorn base, so please be patient!";

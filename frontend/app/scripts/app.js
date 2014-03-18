@@ -24,7 +24,7 @@ var signinResolver = ['$q', '$location', 'authService', function ($q, $location,
 	return deferred.promise;
 }];
 
-angular.module('frontendApp', [
+var frontendApp = angular.module('frontendApp', [
 	'ngCookies',
 	'ngResource',
 	'ngSanitize',
