@@ -1,13 +1,9 @@
 'use strict';
 
 angular.module('frontendApp')
-	.controller('MainCtrl', function ($scope, $http) {
-		$scope.awesomeThings = [
-			'HTML5 Boilerplate',
-			'AngularJS',
-			'Karma'
-		];
+    .controller('NavCtrl', function ($scope, $location, authService) {
         $scope.isActive = function (viewLocation) {
             return viewLocation === $location.path();
         };
-	});
+        $scope.isAuthenticated = authService.isAuthenticated;
+    });

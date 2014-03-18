@@ -19,7 +19,7 @@ angular.module('frontendApp')
 					if (!ok) {
 						return;
 					}
-					$location.path('/');
+					$scope.okMessage = "A unicorn is on its way with your super secret login link, keep a lookout!";
 				})
 				.error(function (data) {
 					$scope.message = data;

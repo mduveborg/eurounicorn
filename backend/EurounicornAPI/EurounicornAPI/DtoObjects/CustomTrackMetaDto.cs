@@ -6,10 +6,12 @@ using System.Web;
 
 namespace EurounicornAPI.DtoObjects
 {
-    public class CustomTrackMetaDto //: CouchObject
+    public class CustomTrackMetaDto : CouchObject
     {
         // Connection to sound cloud
         public int TrackId;
+        public string docType { get { return "track"; } }
+        public string Username;
         
         // Custom meta information
         public string SongTitle;

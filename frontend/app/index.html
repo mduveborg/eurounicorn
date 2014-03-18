@@ -25,22 +25,29 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="header">
-      <ul class="nav nav-pills pull-right">
-        <li class="active"><a ng-href="#">Home</a></li>
-          <li><a ng-href="#submission">Submission</a></li>
-        <li><a ng-href="#list">Songs</a></li>
-        <li><a ng-href="#">About</a></li>
-        <li><a ng-href="#">Contact</a></li>
+    <div class="container">
+    <div ng-controller="NavCtrl">
+      <ul class="nav nav-pills">
+          <li ng-class="{ active: isActive('/')}"><a ng-href="#">Home</a></li>
+          <li ng-class="{ active: isActive('/rules')}"><a ng-href="#rules">Rules</a></li>
+          <li ng-class="{ active: isActive('/submission')}" ng-show="isAuthenticated()"><a ng-href="#submission">Submission</a></li>
+          <li ng-class="{ active: isActive('/list')}" ng-show="isAuthenticated()"><a ng-href="#list">Songs</a></li>
+          <li ng-hide="isAuthenticated()" ng-class="{ active: isActive('/login')}"><a ng-href="#login">Login</a></li>
+          <li ng-show="isAuthenticated()" ng-class="{ active: isActive('/logout')}"><a ng-href="#logout">Logout</a></li>
       </ul>
     </div>
+        </div>
+
+
 
     <div class="container" ng-view=""></div>
 
     <div id="footer" class="footer">
-      <div class="pull-right">
-        <img src="images/netlight_logo.png" alt="Netlight logo">
-      </div>
+        <div class="container-fluid">
+            <div class="col-xs-12 text-center footer-image">
+                <img id="logo-img" src="images/netlight_logo.png" alt="Netlight logo"/>
+            </div>
+        </div>
     </div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
@@ -59,10 +66,10 @@
     <script src="bower_components/json3/lib/json3.min.js"></script>
     <![endif]-->
 
+    <script src="bower_components/ng-file-upload/angular-file-upload-shim.js"></script>
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/jquery.js"></script>
-    <script src="bower_components/ng-file-upload/angular-file-upload-shim.js"></script> <!-- Note: shim.js MUST BE PLACED BEFORE angular.js -->
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/sass-bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
@@ -77,8 +84,10 @@
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/controllers/nav.js"></script>
         <script src="scripts/controllers/login.js"></script>
         <script src="scripts/controllers/submission.js"></script>
+        <script src="scripts/controllers/spam.js"></script>
         <script src="scripts/controllers/list.js"></script>
         <script src="scripts/services/authservice.js"></script>
         <script src="scripts/apiMock.js"></script>

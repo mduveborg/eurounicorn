@@ -41,7 +41,7 @@ namespace EurounicornAPI.Mailing
             request.AddParameter("from", "Rarity <rarity@eurounicorn.func.is>");
             request.AddParameter("to", email);
             request.AddParameter("subject", subject);
-            request.AddParameter("text", body);
+            request.AddParameter("html", body);
             request.Method = Method.POST;
             return client.Execute(request);
         }

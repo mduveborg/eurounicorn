@@ -1,6 +1,14 @@
-<div class="jumbotron" ng-bind-html="playlist">
-</div>
+<div class="jumbotron">
+	<div ng-hide="playlist && playlist.length > 0">
+		Sorry, there is nothing here yet. Why don't you go record a submission?
+	</div>
+	<div ng-repeat="track in playlist">
+		<h2>{{ join(track.title, track.customTrackMeta.stageName, '-') }}</h2>
+		<h4>{{ join(track.customTrackMeta.composers, track.customTrackMeta.musicians, '&') }}</h4>
+		<h4 ng-hide="!track.customTrackMeta.username">Uploaded by {{ track.customTrackMeta.username }}</h4>
+		<div ng-bind-html="trust(track.embed)">
 
-<div class="footer">
-  <p>Love from the Unicorn</p>
+		</div>
+	</div>
+	
 </div>

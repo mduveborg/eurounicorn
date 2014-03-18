@@ -4,7 +4,12 @@ angular.module('frontendApp.Services', [])
 	.factory('auth', [ '$window', function ($window) {
 		return {
 			setToken: function (token) {
-				$window.localStorage.token = token;
+				if (token === null) {
+					delete $window.localStorage.token;
+				}
+				else {
+					$window.localStorage.token = token;
+				}
 			},
 			isAuthenticated: function () {
 				return !!$window.localStorage.token;

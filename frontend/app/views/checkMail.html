@@ -12,18 +12,15 @@
 
   <form style="text-align: center;margin-top: 40px;" ng-submit="submit()" class="form-inline" role="form">
 
-	  <div ng-hide="okMessage">
-  <p>Enter your Netlight email. An email will be sent to your Netlight email, click the link in the email to sign in!</p>
+  <p>Enter your Netlight username. An email will be sent to your Netlight email, click the link in the email to sign in!</p>
 
   <div ng-class="{'has-error': !!message }" class="form-group">
-    <input ng-model="input" type="text" class="form-control" placeholder="your Netlight email">
+    <input ng-model="input" type="text" class="form-control" placeholder="your Netlight username">
   </div>
 
   <button type="submit" class="btn btn-lg btn-success">Submit</button>
 
   <p class="text-danger">{{ message }}</p>
-  </div>
-  <p ng-hide="!okMessage">{{ okMessage }}</p>
 
   </form>
 </div>

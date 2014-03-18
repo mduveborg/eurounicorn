@@ -12,6 +12,7 @@ using Krystalware.UploadHelper;
 using System.Collections.Specialized;
 using System.Threading.Tasks;
 using System.Threading;
+using Newtonsoft.Json;
 
 namespace EurounicornAPI.SoundCloud
 {
@@ -54,14 +55,15 @@ namespace EurounicornAPI.SoundCloud
 
         private static string tooken;
 
-        public string Upload(UploadTrack track, string token = null)
+        public UploadResponse Upload(UploadTrack track, string token = null)
         {
             if (token == null)
                 token = GetAccessToken();
-            string response = UploadTrack(track.Data, token, track.Title, track.Filename);
+            var response = UploadTrack(track.Data, token, track.Title, track.Filename);
             
             return response;
         }
+
 
         public void DeleteTrack(string title, string token = null)
         {
@@ -82,14 +84,33 @@ namespace EurounicornAPI.SoundCloud
             return cloud.Me.Tracks.Get().ToList();
         }
 
-        public async Task<IEnumerable<Track>> GetTracksAsync(string token)
+        public string GetEmbedded(Track track, string token = null)
         {
-            var cloud = new Ewk.SoundCloud.ApiLibrary.SoundCloud(ClientId, token);
-            var test = cloud.Me.Get();
-            return await cloud.Me.Tracks.GetAsync();
+            if (token == null)
+                token = GetAccessToken();
+            //WebClient to communicate via http
+            WebClient client = new WebClient();
+            var test = client.DownloadData(track.uri + ".json?" + "client_id=" + ClientId + "&oauth_token=" + token);
+
+
+            //Authentication data
+            string postData = "url=" + track.uri
+                + "&format=json"
+                + "&oauth_token=" + token;
+
+            //Authentication
+            string soundCloudTokenRes = "http://soundcloud.com/oembed";
+            string tokenInfo = client.UploadString(soundCloudTokenRes, postData);
+            return tokenInfo;
         }
 
-        private string UploadTrack(Stream data, string token, string title, string filename)
+        public IEnumerable<Track> GetTracks(string token)
+        {
+            var cloud = new Ewk.SoundCloud.ApiLibrary.SoundCloud(ClientId, token);
+            return cloud.Me.Tracks.Get();
+        }
+
+        private UploadResponse UploadTrack(Stream data, string token, string title, string filename)
         {
             System.Net.ServicePointManager.Expect100Continue = false;
             var request = WebRequest.Create("https://api.soundcloud.com/tracks") as HttpWebRequest;
@@ -119,7 +140,7 @@ namespace EurounicornAPI.SoundCloud
                 {
                     using (var reader = new StreamReader(response.GetResponseStream()))
                     {
-                        return reader.ReadToEnd();
+                        return JsonConvert.DeserializeObject<UploadResponse>(reader.ReadToEnd());
                     }
                 }
             }
@@ -128,5 +149,9 @@ namespace EurounicornAPI.SoundCloud
                 throw ex;
             }
         }
+    }
+    public class UploadResponse
+    {
+        public int id { get; set; }
     }
 }

@@ -14,7 +14,17 @@ var checkAuthResolver = ['$q', '$location', 'authService', function ($q, $locati
 	return deferred.promise;
 }];
 
-angular.module('frontendApp', [
+var signinResolver = ['$q', '$location', 'authService', function ($q, $location, auth) {
+	var deferred = $q.defer();
+	if ($location.search().token) {
+		auth.setToken($location.search().token);
+		$location.search('token', null);
+	}
+	deferred.resolve(true);
+	return deferred.promise;
+}];
+
+var frontendApp = angular.module('frontendApp', [
 	'ngCookies',
 	'ngResource',
 	'ngSanitize',
@@ -28,12 +38,29 @@ angular.module('frontendApp', [
 			templateUrl: 'views/main.html',
 			controller: 'MainCtrl',
 			resolve: {
-				factory: checkAuthResolver
+				factory: signinResolver
 			}
+		})
+		.when('/rules', {
+			templateUrl: 'views/rules.html',
 		})
 		.when('/login', {
 			templateUrl: 'views/login.html',
-			controller: 'LoginCtrl'
+			controller: 'LoginCtrl',
+			resolve: {
+				factory: signinResolver
+			}
+		})
+		.when('/logout', {
+			templateUrl: 'views/login.html',
+			controller: function ($location, auth) {
+				auth.setToken(null);
+				$location.path('/login');
+			}
+		})
+		.when('/spam', {
+			templateUrl: 'views/spam.html',
+			controller: 'SpamCtrl'
 		})
 		.when('/list', {
 			templateUrl: 'views/list.html',

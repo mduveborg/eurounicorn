@@ -50,18 +50,18 @@ namespace EurounicornAPI.CouchDB
                     },
                     byUsername = new 
                     {
-                        Map = "function (doc) { emit(doc.Username, doc); }"
+                        Map = "function (doc) { if (doc.docType === 'token') { emit(doc.Username, doc); } }"
                     },
                     byTrackId = new
                     {
-                        Map = "function(doc) { emit(doc.TrackId, doc); }"
+                        Map = "function(doc) { if (doc.docType === 'track') { emit(doc.TrackId, doc); } }"
                     }
                 }
             };
-            var prev = database.GetDocument(doc._id);
-            if (prev != null)
-                database.DeleteDocument(prev.Id, prev.Rev);
-            database.CreateDocument(doc._id, JsonConvert.SerializeObject(doc, Formatting.Indented, settings));
+            //var prev = database.GetDocument(doc._id);
+            //if (prev != null)
+            //    database.DeleteDocument(prev.Id, prev.Rev);
+            //database.CreateDocument(doc._id, JsonConvert.SerializeObject(doc, Formatting.Indented, settings));
 
 
             database.SetDefaultDesignDoc(designDoc);

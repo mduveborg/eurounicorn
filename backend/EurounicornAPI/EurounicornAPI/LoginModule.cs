@@ -46,7 +46,7 @@ namespace EurounicornAPI
                 if (validationResponse != null) return validationResponse;
                 var token = tokenService.Login(username);
                 var combine = string.Format("{0}!{1}", username, token);
-                MailgunService.SendMail(username, "The unicorn says hi!", string.Format(File.ReadAllText(Path.Combine(AssemblyDirectory, "Mailing\\LoginMailResponse.txt")), "localhost:3827", combine));
+                MailgunService.SendMail(username, "The unicorn says hi!", string.Format(File.ReadAllText(Path.Combine(AssemblyDirectory, "Mailing\\LoginMailResponse.txt")), this.Request.Url.SiteBase, combine));
                 return HttpStatusCode.OK;
             };
         }

@@ -11,6 +11,18 @@ using System.Web;
 
 namespace EurounicornAPI
 {
+    public class AuthEvent
+    {
+        public DateTime At
+        {
+            get;
+            set;
+        }
+
+        public string Username { get; set; }
+
+        public string docType { get { return "authEvent"; } }
+    }
     public class AuthModule : NancyModule
     {
         public AuthModule()
@@ -27,21 +39,17 @@ namespace EurounicornAPI
 
         private Response AuthenticateRequest(NancyContext ctx)
         {
-            if (this.Request.Headers.Authorization == "supersecretrandomkey")
-            {
-                ctx.CurrentUser = new UserIdentity { UserName = "Dev" };
-                return null;
-            }
             var user = Authenticate(this.Request.Headers.Authorization);
             if (user != null)
             {
                 ctx.CurrentUser = user;
+                db.Set(new AuthEvent() { At = DateTime.UtcNow, Username = user.UserName });
                 return null;
             }
             return HttpStatusCode.Unauthorized;
         }
 
-        CouchDBService db;
+        protected CouchDBService db;
         TokenService tokenService;
         private void init()
         {
