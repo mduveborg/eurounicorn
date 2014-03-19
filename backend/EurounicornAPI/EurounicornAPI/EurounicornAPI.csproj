@@ -136,6 +136,10 @@
     <Compile Include="SoundCloud\SoundCloudService.cs" />
     <Compile Include="SpamModule.cs" />
     <Compile Include="SubmissionModule.cs" />
+    <Compile Include="Voting\Entities\User.cs" />
+    <Compile Include="Voting\Entities\Vote.cs" />
+    <Compile Include="Voting\IVotingService.cs" />
+    <Compile Include="Voting\VotingService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ApiLibrary\ApiLibrary.csproj">

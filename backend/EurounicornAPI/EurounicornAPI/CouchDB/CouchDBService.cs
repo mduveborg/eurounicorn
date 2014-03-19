@@ -1,4 +1,5 @@
-﻿using LoveSeat;
+﻿using EurounicornAPI.Voting.Entities;
+using LoveSeat;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
@@ -31,7 +32,7 @@ namespace EurounicornAPI.CouchDB
             // connect to Cloudant
             client = new CouchClient("unieurocorn.cloudant.com", 443, "hermstaredgeshoreseembel", "36nDB1aax4CgOBgflrFgIpPU", true, AuthenticationType.Basic);
             
-            database = client.GetDatabase("submissions");
+            database = client.GetDatabase("submissions_test");
 
             var settings = new JsonSerializerSettings();
             var converters = new List<JsonConverter> { new IsoDateTimeConverter() };
@@ -55,6 +56,10 @@ namespace EurounicornAPI.CouchDB
                     byTrackId = new
                     {
                         Map = "function(doc) { if (doc.docType === 'track') { emit(doc.TrackId, doc); } }"
+                    },
+                    byLevel = new
+                    {
+                        Map = "function(doc) { if (doc.docType === 'user') { emit(doc.Level, doc); } }"
                     }
                 }
             };
@@ -122,6 +127,16 @@ namespace EurounicornAPI.CouchDB
         public void Delete(CouchObject obj)
         {
             database.DeleteDocument(obj._id, obj._rev);
+        }
+
+        public IEnumerable<User> FindUserByLevel(Level level)
+        {
+            var usersWithLevel = database.View<User>("byLevel", new ViewOptions
+            {
+                Stale = false,
+                Key = new KeyOptions(level)
+            });
+            return usersWithLevel.Items;
         }
     }
 }
