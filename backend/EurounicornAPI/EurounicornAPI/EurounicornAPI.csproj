@@ -125,6 +125,7 @@
     <Compile Include="Authentication\UserIdentity.cs" />
     <Compile Include="AuthModule.cs" />
     <Compile Include="AutoMapperResolvers\SoundCloudMetaResolver.cs" />
+    <Compile Include="CouchDB\ICouchDBService.cs" />
     <Compile Include="DtoObjects\CustomTrackMetaDto.cs" />
     <Compile Include="DtoObjects\SoundCloudMetaDto.cs" />
     <Compile Include="DtoObjects\TrackDto.cs" />

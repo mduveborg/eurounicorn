@@ -21,7 +21,7 @@ namespace EurounicornAPI.CouchDB
         public string _rev { get; set; }
     }
 
-    public class CouchDBService
+    public class CouchDBService : ICouchDBService
     {
         CouchClient client;
         CouchDatabase database;
@@ -129,7 +129,7 @@ namespace EurounicornAPI.CouchDB
             database.DeleteDocument(obj._id, obj._rev);
         }
 
-        public IEnumerable<User> FindUserByLevel(Level level)
+        public IEnumerable<User> FindUsersByLevel(Level level)
         {
             var usersWithLevel = database.View<User>("byLevel", new ViewOptions
             {

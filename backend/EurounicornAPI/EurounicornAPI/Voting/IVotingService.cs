@@ -39,9 +39,9 @@ namespace EurounicornAPI.Voting
         void CastVote(string username, int trackId, int points);
 
         /// <summary>
-        /// Gets the voting distribution with percentage per level.
+        /// Gets the voter turnout per level.
         /// </summary>
         /// <returns></returns>
-        IDictionary<Level, double> GetVotingDistribution();
+        IDictionary<Level, double> GetVoterTurnout();
     }
 }
