@@ -2,13 +2,39 @@
 	<div ng-hide="playlist && playlist.length > 0">
 		Sorry, there is nothing here yet. Why don't you go record a submission?
 	</div>
-	<div ng-repeat="track in playlist">
-		<h2>{{ join(track.title, track.customTrackMeta.stageName, '-') }}</h2>
-		<h4>{{ join(track.customTrackMeta.composers, track.customTrackMeta.musicians, '&') }}</h4>
-		<h4 ng-hide="!track.customTrackMeta.username">Uploaded by {{ track.customTrackMeta.username }}</h4>
-		<div ng-bind-html="trust(track.embed)">
+
+	<div style="text-align:left">
+		<p>Your votes</p>
+	
+		<p ng-repeat="point in points"><strong>{{point}} point(s): </strong>{{ join(findTrack(votes[point]).title, findTrack(votes[point]).customTrackMeta.stageName, '-') || "-" }}</p>
+	
+		<button ng-click="submit()" class="btn btn-primary">Submit votes</button> 
+	</div>
+
+	
+	<div class="row" ng-repeat="track in playlist">
+
+		<hr style="border-top: 1px solid black;">
+
+		<div class="col-md-8">
+
+			<h2>{{ join(track.title, track.customTrackMeta.stageName, '-') }}</h2>
+			<h4>{{ join(track.customTrackMeta.composers, track.customTrackMeta.musicians, '&') }}</h4>
+			<h4 ng-hide="!track.customTrackMeta.username">Uploaded by {{ track.customTrackMeta.username }}</h4>
+			<div ng-bind-html="trust(track.embed)">
+
+			</div>
 
 		</div>
+
+		<div class="col-md-4">	
+		      <div class="btn-group">
+
+		        <button ng-repeat="point in points" ng-class="{'active': votes[point] == track.id}" ng-click="vote(point, track.id)" type="button" class="btn btn-primary">{{point}}</button>
+
+		    </div>
+		</div>
+
 	</div>
 	
 </div>
