@@ -9,12 +9,14 @@ angular.module('frontendApp')
 		$scope.votes = {};
 
 		$scope.submit = function() {
+
 			var v = $scope.votes;
 			if(v[1] && v[2] && v[3]) {
 
 				$http({method: 'POST', url: '/api/votes', data: v}).
 				    success(function(data, status, headers, config) {
 				    	alert("Your votes are sent!")
+				    	$scope.hasVoted = true;
 				    }).
 				    error(function(data, status, headers, config) {
 				      	alert("Ooops. A technical error occured. Our developers are working hard to get the service up and running again!")
@@ -26,6 +28,12 @@ angular.module('frontendApp')
 		}
 
 		$scope.vote = function(point, trackId) {
+
+			if($scope.hasVoted) {
+				alert("Your votes are already sent!");
+				return;
+			}
+
 			// If this point is already set, clear it
 			for(var i = 0; i < $scope.points.length; i++) {
 				if($scope.votes[$scope.points[i]] == trackId) {
@@ -61,7 +69,11 @@ angular.module('frontendApp')
 
 			$http({method: 'get', url: '/api/votes'})
 				.success(function (votes) {
-					$scope.votes = votes;
+					$scope.votes = votes || {};
+					if(votes) {
+						$scope.hasVoted = true;
+					}
+						
 				})
 				.error(function () {
 					$location.path('/login');

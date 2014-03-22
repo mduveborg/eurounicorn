@@ -8,7 +8,7 @@
 	
 		<p ng-repeat="point in points"><strong>{{point}} point(s): </strong>{{ join(findTrack(votes[point]).title, findTrack(votes[point]).customTrackMeta.stageName, '-') || "-" }}</p>
 	
-		<button ng-click="submit()" class="btn btn-primary">Submit votes</button> 
+		<button ng-show="!hasVoted" ng-click="submit()" class="btn btn-primary">Submit votes</button> 
 	</div>
 
 	
