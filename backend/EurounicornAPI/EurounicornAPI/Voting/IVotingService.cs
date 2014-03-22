@@ -1,4 +1,5 @@
-﻿using EurounicornAPI.Voting.Entities;
+﻿using EurounicornAPI.DtoObjects;
+using EurounicornAPI.Voting.Entities;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -21,14 +22,14 @@ namespace EurounicornAPI.Voting
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
-        IEnumerable<Vote> GetVotesForUser(string username);
+        IEnumerable<VoteDto> GetVotesForUser(string username);
 
         /// <summary>
         /// Gets all votes for the track with the supplied track ID.
         /// </summary>
         /// <param name="trackId"></param>
         /// <returns></returns>
-        IEnumerable<Vote> GetVotesForTrack(int trackId);
+        IEnumerable<VoteDto> GetVotesForTrack(int trackId);
 
         /// <summary>
         /// Casts a vote.
@@ -43,5 +44,11 @@ namespace EurounicornAPI.Voting
         /// </summary>
         /// <returns></returns>
         IDictionary<Level, double> GetVoterTurnout();
+
+        /// <summary>
+        /// Makes sure that the User object existst and has a Level.
+        /// </summary>
+        /// <returns></returns>
+        void AssertUser(string username, Level level);
     }
 }

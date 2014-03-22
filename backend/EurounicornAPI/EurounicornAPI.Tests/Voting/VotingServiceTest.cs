@@ -107,7 +107,7 @@ namespace EurounicornAPI.Tests.Voting
 		{
 			// Arrange
 			var couchDbMock = new Mock<ICouchDBService>();
-			couchDbMock.Setup(c => c.FindUsersByLevel(It.IsAny<Level>())).Returns(new List<User>());
+			couchDbMock.Setup(c => c.FindByLevel<User>(It.IsAny<Level>())).Returns(new List<User>());
 
 			// Act
 			var votingService = new VotingService(couchDbMock.Object);
@@ -122,7 +122,7 @@ namespace EurounicornAPI.Tests.Voting
 		{
 			// Arrange
 			var couchDbMock = new Mock<ICouchDBService>();
-			couchDbMock.Setup(c => c.FindUsersByLevel(It.Is<Level>(l => l == Level.A))).Returns(new[]
+			couchDbMock.Setup(c => c.FindByLevel<User>(It.Is<Level>(l => l == Level.A))).Returns(new[]
 			{
 				new User { Username = "unicorn1@netlight.com", Level = Level.A },
 				new User { Username = "unicorn2@netlight.com", Level = Level.A },
@@ -143,7 +143,7 @@ namespace EurounicornAPI.Tests.Voting
 			// Arrange - create 5 distinct users, both A and AC, out of which one user from each level has
 			// voted (which should give a turnout of 33.3% for A and 50% for AC).
 			var couchDbMock = new Mock<ICouchDBService>();
-			couchDbMock.Setup(c => c.FindUsersByLevel(It.Is<Level>(l => l == Level.A))).Returns(new[]
+			couchDbMock.Setup(c => c.FindByLevel<User>(It.Is<Level>(l => l == Level.A))).Returns(new[]
 			{
 				new User { Username = "unicorn1@netlight.com", Level = Level.A },
 				new User { Username = "unicorn2@netlight.com", Level = Level.A },
@@ -156,7 +156,7 @@ namespace EurounicornAPI.Tests.Voting
 				new Vote { Username = "unicorn1@netlight.com" }
 			});
 
-			couchDbMock.Setup(c => c.FindUsersByLevel(It.Is<Level>(l => l == Level.AC))).Returns(new[]
+			couchDbMock.Setup(c => c.FindByLevel<User>(It.Is<Level>(l => l == Level.AC))).Returns(new[]
 			{
 				new User { Username = "unicorn4@netlight.com", Level = Level.AC },
 				new User { Username = "unicorn5@netlight.com", Level = Level.AC }
