@@ -14,13 +14,13 @@ namespace EurounicornAPI.CouchDB
 
 		T Get<T>(string id) where T : class;
 
-		IEnumerable<T> FindByUsername<T>(string username) where T : class;
-
 		IEnumerable<JToken> GetByDocType<T>(string docType) where T : class;
 
-		IEnumerable<T> FindByTrackId<T>(int trackId) where T : class;
+        IEnumerable<T> FindByUsername<T>(string username) where T : class;
 
-		IEnumerable<User> FindUsersByLevel(Level level);
+        IEnumerable<T> FindByTrackId<T>(int trackId) where T : class;
+
+        IEnumerable<T> FindByLevel<T>(Level level) where T : class;
 
 		void Delete(IEnumerable<JToken> tokens);
 
