@@ -6,7 +6,16 @@
 	<div style="text-align:left">
 		<p>Your votes</p>
 	
-		<p ng-repeat="point in points"><strong>{{point}} point(s): </strong>{{ join(findTrack(votes[point]).title, findTrack(votes[point]).customTrackMeta.stageName, '-') || "-" }}</p>
+		<p ng-repeat="point in points">
+
+			<strong>{{point}}
+			<ng-pluralize count="point"
+                 when="{'one': 'point:&nbsp&nbsp',
+                     'other': 'points: '}">
+			</ng-pluralize>
+			</strong>
+
+			{{ join(findTrack(votes[point]).title, findTrack(votes[point]).customTrackMeta.stageName, '-') || "-" }}</p>
 	
 		<button ng-show="!hasVoted" ng-click="submit()" class="btn btn-primary">Submit votes</button> 
 	</div>
