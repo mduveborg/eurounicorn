@@ -8,6 +8,7 @@ using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -31,8 +32,11 @@ namespace EurounicornAPI.CouchDB
 
         public CouchDBService()
         {
+			var username = ConfigurationManager.AppSettings["couchDbUser"];
+			var password = ConfigurationManager.AppSettings["couchDbPassword"];
+
             // connect to Cloudant
-            client = new CouchClient("unieurocorn.cloudant.com", 443, "hermstaredgeshoreseembel", "36nDB1aax4CgOBgflrFgIpPU", true, AuthenticationType.Basic);
+            client = new CouchClient("unieurocorn.cloudant.com", 443, username, password, true, AuthenticationType.Basic);
             
             database = client.GetDatabase("submissions_test");
 

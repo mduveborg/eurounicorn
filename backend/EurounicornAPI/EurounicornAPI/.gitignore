@@ -1,1 +1,3 @@
 dist
+credentials.dev.config
+credentials.prod.config

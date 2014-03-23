@@ -13,6 +13,7 @@ using System.Collections.Specialized;
 using System.Threading.Tasks;
 using System.Threading;
 using Newtonsoft.Json;
+using System.Configuration;
 
 namespace EurounicornAPI.SoundCloud
 {
@@ -33,10 +34,9 @@ namespace EurounicornAPI.SoundCloud
             //WebClient to communicate via http
             WebClient client = new WebClient();
 
-
             //Credentials (username & password)
-            string username = "eurounicorn";
-            string password = "NEdVN634p1BFngaZsWVv";
+			string username = ConfigurationManager.AppSettings["soundCloudUser"];
+			string password = ConfigurationManager.AppSettings["soundCloudPassword"];
 
             //Authentication data
             string postData = "client_id=" + ClientId

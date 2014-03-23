@@ -1,6 +1,7 @@
 ﻿using RestSharp;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 
@@ -8,13 +9,14 @@ namespace EurounicornAPI.Mailing
 {
     public class MailgunService
     {
+		private static string username = ConfigurationManager.AppSettings["mailGunUser"];
+		private static string password = ConfigurationManager.AppSettings["mailGunPassword"];
+
         public static IRestResponse SendSimpleMessage()
         {
             RestClient client = new RestClient();
             client.BaseUrl = "https://api.mailgun.net/v2";
-            client.Authenticator =
-                   new HttpBasicAuthenticator("api",
-                                              "key-2tm-xybgf7nkh-7yssk0ug34ciaj5ld9");
+            client.Authenticator = new HttpBasicAuthenticator(username, password);
             RestRequest request = new RestRequest();
             request.AddParameter("domain",
                                 "eurounicorn.func.is", ParameterType.UrlSegment);
@@ -31,9 +33,7 @@ namespace EurounicornAPI.Mailing
         {
             RestClient client = new RestClient();
             client.BaseUrl = "https://api.mailgun.net/v2";
-            client.Authenticator =
-                   new HttpBasicAuthenticator("api",
-                                              "key-2tm-xybgf7nkh-7yssk0ug34ciaj5ld9");
+            client.Authenticator = new HttpBasicAuthenticator(username, password);
             RestRequest request = new RestRequest();
             request.AddParameter("domain",
                                 "eurounicorn.func.is", ParameterType.UrlSegment);
