@@ -10,7 +10,7 @@ namespace EurounicornAPI.Tests
     public class VotingModuleTests
     {
         [TestMethod]
-        public void TestThatNetlightPost_OK()
+        public void TestCallingServiceFromModule()
         {
 
             //var bootstrapper = new DefaultNancyBootstrapper();
