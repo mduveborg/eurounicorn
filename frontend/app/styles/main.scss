@@ -74,6 +74,11 @@ ul.nav li.active a {
   @include font-size(1.8);
   padding: 4px 24px;
   background-color: $NetlightPurple;
+  border-color: $NetlightPurple;
+}
+
+.jumbotron .btn.active {
+  background-color: $DarkGrey;
 }
 
 /* Supporting marketing content */
@@ -172,4 +177,11 @@ $defaultMargin:5px;
 .custom-file-input{
   width:100%;
   @include font-size(1.7);
+}
+
+
+// Headers
+
+h2 {
+    color: #2B2050;
 }

@@ -30,8 +30,7 @@
       <ul class="nav nav-pills">
           <li ng-class="{ active: isActive('/')}"><a ng-href="#">Home</a></li>
           <li ng-class="{ active: isActive('/rules')}"><a ng-href="#rules">Rules</a></li>
-          <li ng-class="{ active: isActive('/submission')}" ng-show="isAuthenticated()"><a ng-href="#submission">Submission</a></li>
-          <li ng-class="{ active: isActive('/list')}" ng-show="isAuthenticated()"><a ng-href="#list">Songs</a></li>
+          <li ng-class="{ active: isActive('/list')}" ng-show="isAuthenticated()"><a ng-href="#list">Vote</a></li>
           <li ng-hide="isAuthenticated()" ng-class="{ active: isActive('/login')}"><a ng-href="#login">Login</a></li>
           <li ng-show="isAuthenticated()" ng-class="{ active: isActive('/logout')}"><a ng-href="#logout">Logout</a></li>
       </ul>
