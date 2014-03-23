@@ -140,6 +140,8 @@
     <Compile Include="SoundCloud\SoundCloudService.cs" />
     <Compile Include="SpamModule.cs" />
     <Compile Include="SubmissionModule.cs" />
+    <Compile Include="VoteDummyModule.cs" />
+    <Compile Include="VotingModule.cs" />
     <Compile Include="Voting\Entities\User.cs" />
     <Compile Include="Voting\Entities\Vote.cs" />
     <Compile Include="Voting\IVotingService.cs" />

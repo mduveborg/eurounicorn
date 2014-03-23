@@ -22,21 +22,23 @@ namespace EurounicornAPI.Voting
 
 		public bool UserCanVote(string username)
 		{
-			return UserCanVote(username, 0);
+			return UserCanVote(username, 0, 1);
 		}
 
-        public bool UserCanVote(string username, int trackId)
+        public bool UserCanVote(string username, int trackId, int points)
         {
-			var userVotes = GetVotesForUser(username);
+			var userVotes = GetVotesForUser(username).ToList();
 
 			var isTrackVoteable = true;
+
+            var isPointSetBefore = !userVotes.Any(v => v.Points == points);
 
 			if(trackId > 0)
 			{
 				isTrackVoteable = !userVotes.Any(v => v.TrackId == trackId);
 			}
 
-			return isTrackVoteable && userVotes.Count(v => v.Username == username) < 3;
+			return isTrackVoteable && isPointSetBefore && userVotes.Count(v => v.Username == username) < 3;
         }
 
         public IEnumerable<VoteDto> GetVotesForUser(string username)
@@ -60,7 +62,7 @@ namespace EurounicornAPI.Voting
 				throw new InvalidOperationException("Could not find user " + username + ".");
 			}
 
-			if (UserCanVote(username, trackId))
+			if (UserCanVote(username, trackId, points))
 			{
 				var vote = new Vote { Username = user.Username, Points = points, TrackId = trackId };
 
