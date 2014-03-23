@@ -12,14 +12,14 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css styles/vendor.css -->
     <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/sass-bootstrap/dist/css/bootstrap.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,app}) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/bootstrap.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="frontendApp">
+  <body ng-app="frontendAppDev">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -70,7 +70,6 @@
     <!-- bower:js -->
     <script src="bower_components/jquery/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/sass-bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
@@ -88,8 +87,11 @@
         <script src="scripts/controllers/submission.js"></script>
         <script src="scripts/controllers/spam.js"></script>
         <script src="scripts/controllers/list.js"></script>
+        <script src="scripts/directive/sparkleyDirective.js"></script>
         <script src="scripts/services/authservice.js"></script>
+    <script src="scripts/services/votingservice.js"></script>
         <script src="scripts/apiMock.js"></script>
+        <script src="scripts/sparkle.js"></script>
         <!-- endbuild -->
 </body>
 </html>
