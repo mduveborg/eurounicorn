@@ -8,20 +8,24 @@ using Nancy.ModelBinding;
 
 namespace EurounicornAPI
 {
-    // Make a lazy instantiated CouchDBService
     public class VotingModule : NancyModule
     {
+        private static IVotingService _votingService;
+
+        public IVotingService VotingService
+        {
+            get { return _votingService ?? (_votingService = new VotingService(new CouchDBService())); }
+        }
+
         public VotingModule() : base("api/vote")
         {
-            var _couchDbService = new CouchDBService(); //make lazy
-
             this.Post["/", true] = (_, cancel) =>
             {
                 return Task.Run<dynamic>(() =>
                 {
                     var votesToPost = this.Bind<Vote>();
                     var userName = Context.CurrentUser.UserName;
-                    var votingService = new VotingService(_couchDbService);
+                    var votingService = this.VotingService;
 
                     votingService.CastVote(userName, votesToPost.TrackId, votesToPost.Points);
 
@@ -34,7 +38,7 @@ namespace EurounicornAPI
                 return Task.Run<dynamic>(() =>
                 {
                     var trackId = this.Bind<TrackDto>().Id;
-                    var votingService = new VotingService(_couchDbService);
+                    var votingService = VotingService;
 
                     var votesForTrack = votingService.GetVotesForTrack(trackId);
 
@@ -46,7 +50,7 @@ namespace EurounicornAPI
             {
                 return Task.Run<dynamic>(() =>
                 {
-                    var votingService = new VotingService(_couchDbService);
+                    var votingService = VotingService;
 
                     var turnout = votingService.GetVoterTurnout();
 
@@ -59,7 +63,7 @@ namespace EurounicornAPI
                 return Task.Run<dynamic>(() =>
                 {
                     var userName = Context.CurrentUser.UserName;
-                    var votingService = new VotingService(_couchDbService);
+                    var votingService = VotingService;
 
                     var votesForUser = votingService.GetVotesForUser(userName);
 

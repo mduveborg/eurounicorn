@@ -59,7 +59,7 @@ namespace EurounicornAPI.Tests.Voting
 
 			// Act
 			var votingService = new VotingService(couchDbMock.Object);
-			var canVote = votingService.UserCanVote("unicorn@netlight.com", 300);
+			var canVote = votingService.UserCanVote("unicorn@netlight.com", 300, TODO);
 
 			// Assert
 			Assert.IsTrue(canVote);
@@ -78,7 +78,7 @@ namespace EurounicornAPI.Tests.Voting
 
 			// Act
 			var votingService = new VotingService(couchDbMock.Object);
-			var canVote = votingService.UserCanVote("unicorn@netlight.com", 200);
+			var canVote = votingService.UserCanVote("unicorn@netlight.com", 200, TODO);
 
 			// Assert
 			Assert.IsFalse(canVote);

@@ -17,14 +17,15 @@ namespace EurounicornAPI.Voting
         /// <returns></returns>
         bool UserCanVote(string username);
 
-		/// <summary>
-		/// Indicates whether the user with the supplied user ID is allowed to vote for
-		/// the track with the supplied trackId.
-		/// </summary>
-		/// <param name="username"></param>
-		/// <param name="trackId"></param>
-		/// <returns></returns>
-		bool UserCanVote(string username, int trackId);
+        /// <summary>
+        /// Indicates whether the user with the supplied user ID is allowed to vote for
+        /// the track with the supplied trackId.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="trackId"></param>
+        /// <param name="points"></param>
+        /// <returns></returns>
+        bool UserCanVote(string username, int trackId, int points);
 
         /// <summary>
         /// Gets the votes that the user with the supplied user ID has cast.
