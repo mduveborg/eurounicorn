@@ -27,11 +27,11 @@ namespace EurounicornAPI.Tests.Voting
 		}
 
 		[TestMethod]
-		public void UserCanVote_UserWithVotes_ReturnsFalse()
+		public void UserCanVote_UserWithAllVotes_ReturnsFalse()
 		{
 			// Arrange
 			var couchDbMock = new Mock<ICouchDBService>();
-			couchDbMock.Setup(c => c.FindByUsername<Vote>(It.IsAny<string>())).Returns(new []
+			couchDbMock.Setup(c => c.FindByUsername<Vote>(It.IsAny<string>())).Returns(new[]
 			{
 				new Vote { Username = "unicorn@netlight.com" },
 				new Vote { Username = "unicorn@netlight.com" },
@@ -41,6 +41,44 @@ namespace EurounicornAPI.Tests.Voting
 			// Act
 			var votingService = new VotingService(couchDbMock.Object);
 			var canVote = votingService.UserCanVote("unicorn@netlight.com");
+
+			// Assert
+			Assert.IsFalse(canVote);
+		}
+
+		[TestMethod]
+		public void UserCanVote_UserWithNoPreviousVotesOnTrack_ReturnsTrue()
+		{
+			// Arrange
+			var couchDbMock = new Mock<ICouchDBService>();
+			couchDbMock.Setup(c => c.FindByUsername<Vote>(It.IsAny<string>())).Returns(new[]
+			{
+				new Vote { Username = "unicorn@netlight.com", TrackId = 100 },
+				new Vote { Username = "unicorn@netlight.com", TrackId = 200 }
+			});
+
+			// Act
+			var votingService = new VotingService(couchDbMock.Object);
+			var canVote = votingService.UserCanVote("unicorn@netlight.com", 300);
+
+			// Assert
+			Assert.IsTrue(canVote);
+		}
+
+		[TestMethod]
+		public void UserCanVote_UserWithPreviousVotesOnTrack_ReturnsFalse()
+		{
+			// Arrange
+			var couchDbMock = new Mock<ICouchDBService>();
+			couchDbMock.Setup(c => c.FindByUsername<Vote>(It.IsAny<string>())).Returns(new[]
+			{
+				new Vote { Username = "unicorn@netlight.com", TrackId = 100 },
+				new Vote { Username = "unicorn@netlight.com", TrackId = 200 }
+			});
+
+			// Act
+			var votingService = new VotingService(couchDbMock.Object);
+			var canVote = votingService.UserCanVote("unicorn@netlight.com", 200);
 
 			// Assert
 			Assert.IsFalse(canVote);

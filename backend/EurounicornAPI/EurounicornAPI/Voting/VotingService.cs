@@ -20,12 +20,23 @@ namespace EurounicornAPI.Voting
             _dtoService = new DtoService();
         }
 
-        public bool UserCanVote(string username)
+		public bool UserCanVote(string username)
+		{
+			return UserCanVote(username, 0);
+		}
+
+        public bool UserCanVote(string username, int trackId)
         {
 			var userVotes = GetVotesForUser(username);
 
-			// Behöver vi explicit hantera fall där count == 1, 2 eller 3?
-			return userVotes.Count(v => v.Username == username) == 0;
+			var isTrackVoteable = true;
+
+			if(trackId > 0)
+			{
+				isTrackVoteable = !userVotes.Any(v => v.TrackId == trackId);
+			}
+
+			return isTrackVoteable && userVotes.Count(v => v.Username == username) < 3;
         }
 
         public IEnumerable<VoteDto> GetVotesForUser(string username)
@@ -40,22 +51,22 @@ namespace EurounicornAPI.Voting
             return _dtoService.ConvertVotes(votes);
         }
 
-        public void CastVote(string username, int trackId, int points)
-        {
-            var user = _couchDb.FindByUsername<User>(username).SingleOrDefault();
+		public void CastVote(string username, int trackId, int points)
+		{
+			var user = _couchDb.FindByUsername<User>(username).SingleOrDefault();
 
-			if(user == null)
+			if (user == null)
 			{
 				throw new InvalidOperationException("Could not find user " + username + ".");
 			}
 
-			if(UserCanVote(username))
+			if (UserCanVote(username, trackId))
 			{
 				var vote = new Vote { Username = user.Username, Points = points, TrackId = trackId };
 
 				_couchDb.Set<Vote>(vote);
 			}
-        }
+		}
 
         public IDictionary<Level, double> GetVoterTurnout()
         {

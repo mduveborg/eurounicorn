@@ -127,10 +127,13 @@
     <Compile Include="AutoMapperResolvers\SoundCloudMetaResolver.cs" />
     <Compile Include="CouchDB\ICouchDBService.cs" />
     <Compile Include="DtoObjects\CustomTrackMetaDto.cs" />
+    <Compile Include="DtoObjects\DtoService.cs" />
+    <Compile Include="DtoObjects\IDtoService.cs" />
     <Compile Include="DtoObjects\SoundCloudMetaDto.cs" />
     <Compile Include="DtoObjects\TrackDto.cs" />
     <Compile Include="CouchDB\CouchDBService.cs" />
     <Compile Include="DistModule.cs" />
+    <Compile Include="DtoObjects\VoteDto.cs" />
     <Compile Include="LoginModule.cs" />
     <Compile Include="Mailing\MailgunService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
