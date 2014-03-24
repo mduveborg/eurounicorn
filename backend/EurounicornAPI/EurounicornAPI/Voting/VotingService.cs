@@ -55,16 +55,9 @@ namespace EurounicornAPI.Voting
 
 		public void CastVote(string username, int trackId, int points)
 		{
-			var user = _couchDb.FindByUsername<User>(username).SingleOrDefault();
-
-			if (user == null)
-			{
-				throw new InvalidOperationException("Could not find user " + username + ".");
-			}
-
 			if (UserCanVote(username, trackId, points))
 			{
-				var vote = new Vote { Username = user.Username, Points = points, TrackId = trackId };
+				var vote = new Vote { Username = username, Points = points, TrackId = trackId };
 
 				_couchDb.Set<Vote>(vote);
 			}

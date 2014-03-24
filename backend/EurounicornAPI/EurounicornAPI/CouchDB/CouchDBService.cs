@@ -38,7 +38,7 @@ namespace EurounicornAPI.CouchDB
             // connect to Cloudant
             client = new CouchClient("unieurocorn.cloudant.com", 443, username, password, true, AuthenticationType.Basic);
             
-            database = client.GetDatabase("submissions_test");
+            database = client.GetDatabase("submissions");
 
             var settings = new JsonSerializerSettings();
             var converters = new List<JsonConverter> { new IsoDateTimeConverter() };

@@ -26,8 +26,14 @@ namespace EurounicornAPI.SoundCloud
 
     public class SoundCloudService
     {
-        string ClientSecret = "76c026455b3cb649c863594b26871cbe";
-        string ClientId = "648b7a4aee93dd1a64337baf187e3eba";
+        static readonly string ClientSecret;
+        static readonly string ClientId;
+
+        static SoundCloudService()
+        {
+            ClientId = ConfigurationManager.AppSettings["soundCloudClientId"];
+            ClientSecret = ConfigurationManager.AppSettings["soundCloudSecret"];
+        }
 
         public string GetAccessToken()
         {
@@ -36,7 +42,7 @@ namespace EurounicornAPI.SoundCloud
 
             //Credentials (username & password)
 			string username = ConfigurationManager.AppSettings["soundCloudUser"];
-			string password = ConfigurationManager.AppSettings["soundCloudPassword"];
+            string password = ConfigurationManager.AppSettings["soundCloudPassword"];
 
             //Authentication data
             string postData = "client_id=" + ClientId
