@@ -96,7 +96,7 @@ frontendApp
                         		}	
                         	} 
 
-  
+  							$scope.voteChecked = true;
 
                         })
                         .error(function () {

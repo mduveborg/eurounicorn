@@ -25,7 +25,7 @@
 
 			{{ join(findTrack(votes[point]).title, findTrack(votes[point]).customTrackMeta.stageName, '-') || "-" }}</p>
 
-		<button ng-show="!hasVoted" ng-click="submit()" class="btn btn-primary" sparkley="{color: 'rainbow', count: '100',overlap: '10'}">Submit votes</button>
+		<button ng-show="!hasVoted && voteChecked" ng-click="submit()" class="btn btn-primary" sparkley="{color: 'rainbow', count: '100',overlap: '10'}">Submit votes</button>
 		<h3 ng-show="message">{{message}}</h3>
 	</div>
 
