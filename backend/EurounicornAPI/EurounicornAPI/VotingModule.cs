@@ -8,7 +8,7 @@ using Nancy.ModelBinding;
 
 namespace EurounicornAPI
 {
-    public class VotingModule : NancyModule
+    public class VotingModule : AuthModule
     {
         private static IVotingService _votingService;
 
@@ -33,30 +33,30 @@ namespace EurounicornAPI
                 });
             };
             
-            this.Get["/track", true] = (_, cancel) =>
-            {
-                return Task.Run<dynamic>(() =>
-                {
-                    var trackId = this.Bind<TrackDto>().Id;
-                    var votingService = VotingService;
+            //this.Get["/track", true] = (_, cancel) =>
+            //{
+            //    return Task.Run<dynamic>(() =>
+            //    {
+            //        var trackId = this.Bind<TrackDto>().Id;
+            //        var votingService = VotingService;
 
-                    var votesForTrack = votingService.GetVotesForTrack(trackId);
+            //        var votesForTrack = votingService.GetVotesForTrack(trackId);
 
-                    return Response.AsJson(votesForTrack, HttpStatusCode.OK);
-                });
-            };
+            //        return Response.AsJson(votesForTrack, HttpStatusCode.OK);
+            //    });
+            //};
 
-            this.Get["/turnout", true] = (_, cancel) =>
-            {
-                return Task.Run<dynamic>(() =>
-                {
-                    var votingService = VotingService;
+            //this.Get["/turnout", true] = (_, cancel) =>
+            //{
+            //    return Task.Run<dynamic>(() =>
+            //    {
+            //        var votingService = VotingService;
 
-                    var turnout = votingService.GetVoterTurnout();
+            //        var turnout = votingService.GetVoterTurnout();
 
-                    return Response.AsJson(turnout, HttpStatusCode.OK);
-                });
-            };
+            //        return Response.AsJson(turnout, HttpStatusCode.OK);
+            //    });
+            //};
 
             this.Get["/user", true] = (_, cancel) =>
             {

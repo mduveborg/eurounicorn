@@ -8,7 +8,7 @@ frontendApp.factory('votingservice',
                 var deferred = $q.defer(),
                     promise = deferred.promise;
 
-                $http({method: 'POST', url: '/api/votes', data: vote}).
+                $http({method: 'POST', url: '/api/vote', data: vote}).
                     success(function (data, status, headers, config) {
                         //TODO: implement data, status.
                         deferred.resolve(true);

@@ -85,14 +85,14 @@ frontendApp
                 .success(function (data) {
                     $scope.playlist = data;
 
-                    $http({method: 'get', url: '/api/user'})
+                    $http({method: 'get', url: '/api/vote/user'})
                         .success(function (votes) {
 
                         	if(votes) {
-                        		$scope.hasVoted = true;
                         		for(var i = 0; i < votes.length; i++) {
                         			var vote = votes[i];
                         			$scope.votes[vote.points] = vote.trackId;
+									$scope.hasVoted = true;
                         		}	
                         	} 
 
