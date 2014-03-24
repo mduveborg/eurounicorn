@@ -34,21 +34,21 @@ frontendApp
                     ]).then(function (results) {
                         if(results[0]&&results[1]&&results[2]){
                             $scope.hasVoted = true;
-                            alert( "Your votes are sent!");
+                            $scope.message = "Thank you dear, your votes have made it safely back to the unicorn HQ!";
                         }else{
-                            alert("Ooops. A technical error occurred. Our developers are working hard to get the service up and running again!");
+                            $scope.message = "Ooops. We have made a terrible mistake, and we are truly sorry!";
                         }
                     });
 
                 } else {
-                    alert("Please select 3 songs!")
+                    $scope.message = "Please select 3 songs!";
                 }
             };
 
             $scope.vote = function(point, trackId) {
 
                 if($scope.hasVoted) {
-                    alert("Your votes are already sent!");
+                    $scope.message = "We thank you for your enthusiasm, but voting once is quite enough! ;-)";
                     return;
                 }
 
